@@ -166,13 +166,6 @@ ol.log li{margin-bottom:6px}
 .herorow{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin:18px 0 8px;padding:16px 20px;border-radius:18px;background:var(--grisp)}
 .herorow p{margin:0}
 .cta2{display:flex;flex-wrap:wrap;gap:10px}
-.miniex{display:flex;flex-direction:column;gap:8px}
-.miniex button{display:flex;align-items:center;gap:12px;text-align:left;font:inherit;color:inherit;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:6px;cursor:pointer;transition:border-color .18s ease,transform .18s ease}
-.miniex button:hover{border-color:var(--blue);transform:translateY(-1px)}
-.miniex img{width:56px;height:56px;border-radius:8px;object-fit:cover;flex:none}
-.miniex strong{display:block;font-size:15px;line-height:1.25;margin-bottom:4px}
-.miniex .chem{margin:0}
-.mobonly{display:none}@media(max-width:1023px){.introex{display:none}.mobonly{display:block}}
 @media(max-width:600px){.cta2{width:100%;flex-direction:column-reverse}.cta2 .btn{flex:1 1 auto;justify-content:center}}
 
 .ex3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
@@ -500,7 +493,7 @@ function back(){if(!S.hist.length)return;const l=S.log.pop();if(l)S.visits[l.p]-
 function renderLog(){
   const lg=document.getElementById("log");
   lg.innerHTML=(D()?`<p class="mute" style="margin:0 0 8px"><b>${esc(D().titre)}</b> ${chem(D().chemin)}<br>Boutons en pointillés : le choix fait dans l'exemple.</p>`:"")+
-    (S.log.length?`<ol class="log">${S.log.map(l=>`<li>${esc(l.t)}${l.p==="e1"&&S.esp?" · "+esc(S.esp):""}${l.d?` <span class="mute">→ ${esc(l.d)}</span>`:""}</li>`).join("")}</ol>`:S.page==="start"&&!D()?`<div class="introex"><p class="mute" style="margin:0 0 10px">Commencez par un exemple :</p><div class="miniex">${Object.entries(DEMOS).map(([k,d])=>`<button data-demo="${k}"><img src="${esc(photoDe(d.esp))}" alt=""><span><strong>${esc(d.esp)}</strong>${chem(d.chemin)}</span></button>`).join("")}</div></div><p class="mute mobonly" style="margin:0">Le parcours s'affichera ici.</p>`:`<p class="mute" style="margin:0">Le parcours s'affichera ici.</p>`);
+    (S.log.length?`<ol class="log">${S.log.map(l=>`<li>${esc(l.t)}${l.p==="e1"&&S.esp?" · "+esc(S.esp):""}${l.d?` <span class="mute">→ ${esc(l.d)}</span>`:""}</li>`).join("")}</ol>`:`<p class="mute" style="margin:0">Le parcours s'affichera ici.</p>`);
 }
 function render(){
   const n=num(S.page);
