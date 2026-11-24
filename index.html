@@ -73,7 +73,7 @@ p{margin:0 0 12px;max-width:75ch}
 .mute{color:var(--mute);font-size:15px}
 .choices{display:grid;gap:12px;margin:16px 0}
 @media(min-width:1100px){.choices.deux{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.opt{display:block;width:100%;text-align:left;font:inherit;color:inherit;background:var(--bg);border:2px solid var(--line);border-left-width:8px;border-radius:12px;padding:16px 18px;cursor:pointer;min-height:44px}
+.opt{display:flex;flex-direction:column;justify-content:flex-start;width:100%;text-align:left;font:inherit;color:inherit;background:var(--bg);border:2px solid var(--line);border-left-width:8px;border-radius:12px;padding:16px 18px;cursor:pointer;min-height:44px}
 .opt:hover{border-color:var(--blue)}
 .opt strong{display:block;font-size:19px;margin-bottom:2px}
 .opt span{display:block;font-size:16px}
@@ -181,6 +181,7 @@ footer{background:#fff;border-top:1px solid #eceff2;padding:46px var(--padx) 38p
 .fbas{background:var(--grisp);padding:16px var(--padx);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:12.5px;color:#666}
 .fbas a{color:#333}
 .print-only{display:none}
+p,li,dd,.opt span,.opt em,label.ck span,.ex,.alerte,.trio p,.ladder span,.ex3 span{text-wrap:pretty}
 .prog{height:4px;background:var(--line)}.prog i{display:block;height:100%;background:var(--blue);transition:width .5s cubic-bezier(.2,.7,.2,1)}
 .dot b{transition:background-color .3s,border-color .3s,color .3s,transform .3s}.dot.ici b{transform:scale(1.08)}
 .opt,.sp>button,.ex3 button,.btn,.chips button{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background-color .18s ease}
@@ -264,7 +265,7 @@ ol.trace{margin:6px 0 0;padding-left:22px}ol.trace li{margin-bottom:8px}ol.trace
 <div class="fbas"><span>2026 © Droit animalier Québec - DAQ · Outil en version de travail, contenus en cours de validation · Photos : Wikimedia Commons (auteur et licence sur chaque fiche)</span><a href="https://daq.quebec/politique-confidentialite/">Politique de confidentialité</a></div>
 
 
-<script src="contenu.js?v=2026-11-24f"></script>
+<script src="contenu.js?v=2026-11-24g"></script>
 <script>
 {
 const ETAPES=["","Bien connaître l'espèce","Quelle est la situation ?","Comprendre le problème","Mesures A et B","Réglé ?","Mesure C","Réglé ?","Mesure D, échec","Faire le bilan"];
@@ -332,7 +333,7 @@ function ficheHTML(f,panneau){
 }
 function grille(){
   const groupes=[...new Set(ESPECES.map(e=>e.groupe))];
-  return groupes.map(g=>`<div class="grp">${esc(g)}</div><div class="sp">${ESPECES.filter(e=>e.groupe===g).map(e=>`<button data-esp="${esc(e.nom)}" class="${S.esp===e.nom?"on":""}"><img src="${esc(e.photo)}" alt="" loading="lazy"><span>${esc(e.nom)}</span></button>`).join("")}</div>`).join("");
+  return groupes.map(g=>`<div class="grp">${esc(g)}</div><div class="sp">${ESPECES.filter(e=>e.groupe===g).map(e=>`<button data-esp="${esc(e.nom)}" class="${S.esp===e.nom?"on":""}"><img src="${esc(e.photo)}" alt=""><span>${esc(e.nom)}</span></button>`).join("")}</div>`).join("");
 }
 const photoDe=n=>(ESPECES.find(e=>e.nom===n)||{}).photo||"";
 
@@ -348,7 +349,7 @@ const PAGES={
     </div>
     <div class="stitle"><small>De la plus douce à la plus lourde</small><b>Les mesures d'intervention</b></div>
     <div class="ladder">
-      <div class="v"><b>MESURE A</b><span>Adapter le lieu et nos habitudes</span></div>
+      <div class="v"><b>MESURE A</b><span>Adapter le lieu et vos habitudes</span></div>
       <div class="v"><b>MESURE B</b><span>Éloigner l'être animal sans le toucher</span></div>
       <div class="o"><b>MESURE C</b><span>Intervenir sur l'être animal sans le tuer</span></div>
       <div class="r"><b>MESURE D, ÉCHEC</b><span>Mise à mort volontaire, en dernier recours, en conformité avec la loi</span></div>
@@ -457,7 +458,6 @@ function bilanItems(){
   if(S.delaiC) it.push(["Délai pour la mesure C",S.delaiC]);
   if(S.rq.e6) it.push(["Remarques (mesure C)",S.rq.e6]);
   if(S.log.some(l=>l.p==="e8")) it.push(["MESURE D, ÉCHEC","Mise à mort volontaire"]);
-  it.push(["Étapes suivies",S.log.map(l=>l.t).join(" → ")||"–"]);
   [["Responsable du suivi",b.resp],["Résultat",b.resultat],["Coûts",b.couts],["Êtres animaux concernés",b.nombre],["Ce qui a marché",b.marche],["Ce qui n'a pas marché",b.pasmarche],["À refaire ou à éviter",b.suite]].forEach(([k,v])=>{if(v) it.push([k,v])});
   return it;
 }
@@ -609,7 +609,15 @@ document.addEventListener("input",e=>{
   if(id==="delai"||id==="delaiC") document.querySelectorAll(`[data-delai="${id}"]`).forEach(b=>b.classList.remove("on"));
   if(id.startsWith("bil.")) majBilan();
 });
-document.getElementById("mosaic").innerHTML=ESPECES.map(e=>`<img src="${esc(e.photo)}" alt="" loading="lazy">`).join("");
+const TYPO=[[/ ([:;!?»])/g,"\u00A0$1"],[/« /g,"«\u00A0"],[/(\d) (\d{3})(?=\D|$)/g,"$1\u00A0$2"],[/(\d) (\$|%|ha|m|km|cm|h|ans?|mois|semaines?|jours?|cerfs|abonnés|transformateurs)(?=[\s.,;)]|$)/g,"$1\u00A0$2"],[/\b(MESURES?|Mesures?|mesures?|ÉTAPES?|Étapes?|étapes?) ([A-D]|\d)/g,"$1\u00A0$2"],[/\b([A-D]) et ([A-D])\b/g,"$1\u00A0et\u00A0$2"],[/(\d) (\d{3}-\d{4})/g,"$1\u00A0$2"],[/Info-Santé 811/g,"Info-Santé\u00A0811"]];
+function typo(root){
+  if(!root||root.nodeType===3&&!root.parentNode)return;
+  const w=document.createTreeWalker(root.nodeType===3?root.parentNode:root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentNode.closest("script,style,textarea,input,select,code")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  let n;while(n=w.nextNode()){let v=n.nodeValue,o=v;for(let k=0;k<3;k++)for(const [re,s] of TYPO)v=v.replace(re,s);if(v!==o)n.nodeValue=v}
+}
+new MutationObserver(ms=>{for(const m of ms)for(const nd of m.addedNodes)if(nd.nodeType===1||nd.nodeType===3)typo(nd)}).observe(document.body,{childList:true,subtree:true});
+typo(document.body);
+document.getElementById("mosaic").innerHTML=ESPECES.map(e=>`<img src="${esc(e.photo)}" alt="">`).join("");
 render();
 }
 </script>
