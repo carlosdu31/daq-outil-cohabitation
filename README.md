@@ -7,10 +7,14 @@ Il suit l'arbre de décision de la méthode, étape par étape (ÉTAPE 1 à 9, M
 
 **Statut : version de travail (novembre 2026).** Les contenus sont en cours de validation par la DAQ et évolueront au fil des réunions.
 
+## Responsable
+Outil conçu et maintenu bénévolement par Charles Chaynes pour la DAQ. Pour toute modification, le contacter ou modifier `contenu.js` comme expliqué ci-dessous.
+
 ## Fichiers
 - `index.html` : la page et son fonctionnement (ne pas modifier sans connaissances en HTML/JavaScript).
 - `contenu.js` : **tous les textes** (situations, causes, mesures, délais, 22 fiches espèces, exemples). C'est le seul fichier à modifier pour changer un texte.
 - `logo-daq.png` : logo de la DAQ.
+- Les exemples d'application (3 cas réels) sont aussi dans `contenu.js` (bloc `DEMOS`) : textes par étape, choix, bilan prérempli, conclusion et sources.
 - `photos/` : une photo par espèce (Wikimedia Commons ; auteur et licence indiqués dans `contenu.js` et sur chaque fiche).
 
 ## Modifier un texte

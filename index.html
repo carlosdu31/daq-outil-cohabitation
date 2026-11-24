@@ -150,9 +150,29 @@ footer img{height:56px;width:auto;background:#fff;border-radius:50%}
 footer div{flex:1 1 300px}
 footer b{color:var(--ink)}
 .print-only{display:none}
-@media(prefers-reduced-motion:no-preference){.anim{animation:in .25s ease-out}@keyframes in{from{opacity:0;transform:translateY(6px)}}}
+.prog{height:4px;background:var(--line)}.prog i{display:block;height:100%;background:var(--blue);transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.dot b{transition:background-color .3s,border-color .3s,color .3s,transform .3s}.dot.ici b{transform:scale(1.08)}
+.opt,.sp button,.ex3 button,.btn,.chips button{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background-color .18s ease}
+@media(hover:hover){.opt:hover,.sp button:hover,.ex3 button:hover{transform:translateY(-2px);box-shadow:0 8px 22px -12px rgba(0,60,110,.45)}.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(0,60,110,.5)}}
+.btn:active,.opt:active{transform:translateY(0) scale(.99)}
+.demobar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:-6px 0 22px;padding:12px 16px;border-radius:12px;background:var(--blue);color:#fff}
+.demobar b{font-size:16px}.demobar span{font-size:14px;opacity:.92}
+.demobar .sp1{flex:1 1 220px}
+.demobar button{font:inherit;font-weight:700;font-size:15px;border-radius:99px;padding:8px 16px;min-height:40px;cursor:pointer;border:2px solid #fff;background:#fff;color:#0062ad}
+.demobar button.q{background:transparent;color:#fff}
+.chem{display:inline-flex;gap:4px;vertical-align:middle}
+.chem i{font-style:normal;font-weight:700;font-size:13px;min-width:24px;height:24px;display:grid;place-items:center;border-radius:6px;color:#fff;background:#21804a}
+.chem i.C{background:#b85f0e}.chem i.D{background:#b3261e}
+.verdict{margin:18px 0;padding:18px 20px;border-radius:12px;background:var(--blue2);border-left:6px solid var(--blue)}
+.verdict h3{margin:0 0 6px}
+ol.trace{margin:6px 0 0;padding-left:22px}ol.trace li{margin-bottom:8px}ol.trace small{display:block;color:var(--mute);font-size:15px}
+.srcs{margin:8px 0 0;padding-left:18px;font-size:14px}.srcs li{margin-bottom:4px;overflow-wrap:anywhere}
+.ex3 .chem{margin-bottom:6px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+@media(prefers-reduced-motion:no-preference){.anim{animation:in .38s cubic-bezier(.2,.7,.2,1) both}@keyframes in{from{opacity:0;transform:translateY(10px)}}html{scroll-behavior:smooth}}
 @media print{
   @page{margin:16mm}
+  .prog,.demobar,.verdict .noprint{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
   .top,header,.rail,aside,footer,.row,.noprint,.ex,.tag{display:none!important}
   .wrap{display:block;padding:0}.card{border:0;padding:0}
@@ -177,6 +197,7 @@ footer b{color:var(--ink)}
   <span class="draft">Version de travail</span>
 </header>
 <nav class="rail" id="rail" aria-label="Étapes"></nav>
+<div class="prog" aria-hidden="true"><i id="prog" style="width:0"></i></div>
 <div class="wrap">
   <main id="main" aria-live="polite"></main>
   <aside>
@@ -191,14 +212,9 @@ footer b{color:var(--ink)}
   <div>© 2026 DAQ · Version de travail, novembre 2026.<br>Photos : Wikimedia Commons (auteur et licence indiqués sur chaque fiche).</div>
 </footer>
 
-<script src="contenu.js?v=2026-11-24b"></script>
+<script src="contenu.js?v=2026-11-24c"></script>
 <script>
 {
-const DEMO_SEL={
-  ecureuil:{causes:[1],acteurs:[0],A:[0,2],B:[],C:[]},
-  raton:{causes:[0],acteurs:[1,2],A:[0],B:[1],C:[]},
-  cerf:{causes:[2,3],acteurs:[1,2],A:[0,1],B:[0],C:[]}
-};
 const ETAPES=["","Bien connaître l'espèce","Quelle est la situation ?","Comprendre le problème","Mesures A et B","Réglé ?","Mesure C","Réglé ?","Mesure D, échec","Faire le bilan"];
 const neuf=()=>({page:"start",esp:null,sit:null,causes:[],acteurs:[],sel:{A:[],B:[],C:[]},autre:{causes:"",acteurs:"",A:"",B:"",C:""},
   delai:"",delaiC:"",rq:{e3:"",e4:"",e6:""},bil:{org:"",contact:"",lieu:"",date:"",resp:"",resultat:"",couts:"",nombre:"",marche:"",pasmarche:"",suite:""},
@@ -209,7 +225,11 @@ const fiche=()=>ESPECES.find(e=>e.nom===S.esp);
 const num=p=>({start:0,e1:1,e2:2,pres:2,e3:3,e4:4,e5:5,e6:6,e7:7,e8:8,e9:9})[p];
 const D=()=>S.demo?DEMOS[S.demo]:null;
 const vis=p=>(S.visits[p]||1)-1;
-const note=p=>{const d=D();if(!d||!d.notes[p])return"";const a=d.notes[p];return `<div class="ex"><b>${esc(d.titre)} :</b> ${esc(a[Math.min(vis(p),a.length-1)])}</div>`};
+const note=p=>{const d=D();if(!d||!d.notes[p])return"";const a=d.notes[p];return `<div class="ex"><b>Dans l'exemple :</b> ${esc(a[Math.min(vis(p),a.length-1)])}</div>`};
+const chem=l=>`<span class="chem">${l.map(m=>`<i class="${m}">${m}</i>`).join("")}</span>`;
+const demobar=()=>{const d=D();if(!d||S.page==="start")return"";const fin=S.page==="e9";
+  return `<div class="demobar"><div class="sp1"><b>${esc(d.titre)}</b> ${chem(d.chemin)}<br><span>${esc(d.sous)}</span></div>${fin?"":`<button data-next>Étape suivante de l'exemple</button>`}<button class="q" data-reset>Quitter l'exemple</button></div>`};
+const srcList=l=>l&&l.length?`<ul class="srcs">${l.map(s=>`<li><a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a></li>`).join("")}</ul>`:"";
 const hl=(p,id)=>{const d=D();if(!d||!d.choix[p])return"";const a=d.choix[p];return a[Math.min(vis(p),a.length-1)]===id?" demo":""};
 const tag=(n,t)=>`<div class="tag">ÉTAPE ${n}${t?" · "+t:""}</div>`;
 const opt=(p,id,cls,t,s,e)=>`<button class="opt ${cls}${hl(p,id)}" data-go="${id}"><strong>${esc(t)}</strong>${s?`<span>${esc(s)}</span>`:""}${e?`<em>${esc(e)}</em>`:""}</button>`;
@@ -254,7 +274,8 @@ function ficheHTML(f){
   <h4>Nuisances relevées (grille DAQ, 2026)</h4>
   ${direct.length?`<div class="pills">${direct.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:`<p>Aucune nuisance directe relevée.</p>`}
   <p class="mute" style="margin:0">${esc(f.profil)} Les autres types de nuisances sont faibles, sans source ou inexistants.</p>
-  <div class="alerte o" style="margin-bottom:0"><b>Attention :</b> ${esc(f.attention)}</div></div></div>`;
+  <div class="alerte o"><b>Attention :</b> ${esc(f.attention)}</div>
+  <h4>Sources</h4>${srcList(f.sources)}</div></div>`;
 }
 function grille(){
   const groupes=[...new Set(ESPECES.map(e=>e.groupe))];
@@ -280,9 +301,9 @@ const PAGES={
       <div class="o"><b>MESURE C</b><span>Intervenir sur l'être animal sans le tuer</span></div>
       <div class="r"><b>MESURE D, ÉCHEC</b><span>Mise à mort volontaire, en dernier recours, en conformité avec la loi</span></div>
     </div>
-    <h3>Voir un exemple</h3>
-    <p class="mute">Trois situations réelles, parcourues étape par étape.</p>
-    <div class="ex3">${Object.entries(DEMOS).map(([k,d])=>`<button data-demo="${k}"><img src="${esc(photoDe(d.esp))}" alt=""><span><strong>${esc(d.titre)}</strong>${esc(d.sous)}</span></button>`).join("")}</div></div>`,
+    <h3>Trois exemples réels</h3>
+    <p class="mute">Parcourez un cas réel étape par étape, puis voyez son bilan et les choix faits à chaque étape.</p>
+    <div class="ex3">${Object.entries(DEMOS).map(([k,d])=>`<button data-demo="${k}"><img src="${esc(photoDe(d.esp))}" alt=""><span>${chem(d.chemin)}<strong>${esc(d.titre)}</strong>${esc(d.sous)}</span></button>`).join("")}</div></div>`,
   e1:()=>`<div class="card anim">${tag(1)}<h2>Bien connaître l'espèce</h2>${note("e1")}
     ${fiche()?`${ficheHTML(fiche())}${nav("e2")}<details class="autre"><summary>Choisir une autre espèce</summary>${grille()}</details>`
       :`<p>De quelle espèce s'agit-il ? Cliquez sur sa photo pour voir sa fiche.</p>${grille()}${nav(null)}`}</div>`,
@@ -340,9 +361,12 @@ const PAGES={
     ${nav("e9","Faire le bilan")}</div>`,
   e9:()=>{const b=S.bil;return `<div class="card anim">
     <div class="print-only pcover"><img src="logo-daq.png" alt=""><div><b>Communauté Droit animalier Québec</b>Bilan d'intervention · Cohabiter avec les êtres animaux liminaires<br>Bilan établi le ${esc(auj())}</div></div>
-    ${tag(9)}<h2>Faire le bilan</h2>${note("e9")}
+    ${tag(9)}<h2 class="noprint">Faire le bilan</h2>${note("e9")}
     <p class="noprint">Ce qui a été fait et ce que ça a donné, chiffré et documenté, à réutiliser si la situation se reproduit. Complétez les champs ci-dessous : le récapitulatif se met à jour.</p>
+    ${D()?`<div class="verdict"><h3>Ce que montre cet exemple</h3><p style="margin:0">${esc(D().verdict)}</p></div>`:""}
     <dl class="bilan" id="bilan-dl">${dlHTML()}</dl>
+    <h3>Parcours détaillé : ce qui a été choisi à chaque étape</h3><ol class="trace" id="trace">${traceHTML()}</ol>
+    ${D()&&D().sources.length?`<h3>Sources de l'exemple</h3>${srcList(D().sources)}`:""}
     <div class="noprint">
     <h3>Compléter le bilan</h3>
     <div class="duo">
@@ -381,43 +405,59 @@ function bilanItems(){
   if(S.delaiC) it.push(["Délai pour la mesure C",S.delaiC]);
   if(S.rq.e6) it.push(["Remarques (mesure C)",S.rq.e6]);
   if(S.log.some(l=>l.p==="e8")) it.push(["MESURE D, ÉCHEC","Mise à mort volontaire"]);
-  it.push(["Étapes suivies",S.log.map(l=>l.t+(l.d?" ("+l.d+")":"")).join(" → ")||"–"]);
+  it.push(["Étapes suivies",S.log.map(l=>l.t).join(" → ")||"–"]);
   [["Responsable du suivi",b.resp],["Résultat",b.resultat],["Coûts",b.couts],["Êtres animaux concernés",b.nombre],["Ce qui a marché",b.marche],["Ce qui n'a pas marché",b.pasmarche],["À refaire ou à éviter",b.suite]].forEach(([k,v])=>{if(v) it.push([k,v])});
   return it;
 }
 const dlHTML=()=>bilanItems().map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
-const bilanTexte=()=>"Bilan d'intervention · Cohabiter avec les êtres animaux liminaires\nÉtabli le "+auj()+"\n\n"+bilanItems().map(([k,v])=>k+" : "+v).join("\n");
+const NOMP={e1:"ÉTAPE 1 · Bien connaître l'espèce",e2:"ÉTAPE 2 · Quelle est la situation ?",pres:"ÉTAPE 2 · Simple présence : aucune action requise",e3:"ÉTAPE 3 · Comprendre le problème",e4:"ÉTAPE 4 · Mesures d'intervention A et B",e5:"ÉTAPE 5 · Le problème est-il réglé ?",e6:"ÉTAPE 6 · MESURE C",e7:"ÉTAPE 7 · Le problème est-il réglé ?",e8:"ÉTAPE 8 · MESURE D, ÉCHEC",e9:"ÉTAPE 9 · Faire le bilan"};
+function infoPage(p){
+  const add=(a,x)=>a.concat(x?[x]:[]);const j=a=>a.join(" ; ");
+  if(p==="e1") return S.esp||"";
+  if(p==="e3") return "Cause : "+(j(add(S.causes.map(i=>CAUSES[i]),S.autre.causes))||"–")+". Qui peut agir : "+(j(add(S.acteurs.map(i=>ACTEURS[i]),S.autre.acteurs))||"–")+".";
+  if(p==="e4"){const a=j(add(S.sel.A,S.autre.A)),b=j(add(S.sel.B,S.autre.B));return (a?"MESURE A : "+a+". ":"")+(b?"MESURE B : "+b+". ":"")+(S.delai?"Délai : "+S.delai+".":"")}
+  if(p==="e6"){const c=j(add(S.sel.C,S.autre.C));return (c?"MESURE C : "+c+". ":"")+(S.delaiC?"Délai : "+S.delaiC+".":"")}
+  if(p==="e8") return "Mise à mort volontaire, en dernier recours, en conformité avec la loi.";
+  return "";
+}
+const traceItems=()=>S.log.map(l=>({t:NOMP[l.p]||l.t,d:l.d,i:l.info!==undefined?l.info:(l.p===S.page?"":infoPage(l.p))}));
+const traceHTML=()=>traceItems().map(x=>`<li><b>${esc(x.t)}</b>${x.d?` → ${esc(x.d)}`:""}${x.i?`<small>${esc(x.i)}</small>`:""}</li>`).join("");
+const bilanTexte=()=>"Bilan d'intervention · Cohabiter avec les êtres animaux liminaires\nÉtabli le "+auj()+(D()?"\n"+D().titre+" : "+D().sous:"")+"\n\n"+bilanItems().map(([k,v])=>k+" : "+v).join("\n")+"\n\nParcours détaillé :\n"+traceItems().map((x,i)=>(i+1)+". "+x.t+(x.d?" → "+x.d:"")+(x.i?" ("+x.i+")":"")).join("\n")+(D()?"\n\nCe que montre cet exemple : "+D().verdict:"");
 const LOGTXT={e1:"ÉTAPE 1",e2:"ÉTAPE 2",pres:"Simple présence",e3:"ÉTAPE 3",e4:"ÉTAPE 4",e5:"ÉTAPE 5",e6:"ÉTAPE 6 · MESURE C",e7:"ÉTAPE 7",e8:"ÉTAPE 8 · MESURE D",e9:"ÉTAPE 9"};
 const ROUTE={presence:"pres",nuisance:"e3",imprevisible:"e3",connu:"e3",ok:"e9",autres:"e4",epuisees:"e6",echec:"e8"};
 const DEC={presence:"simple présence",nuisance:"nuisance",imprevisible:"situation imprévisible",connu:"problème connu, rien n'est fait",ok:"réglé",autres:"pas réglé, autres mesures A et B",epuisees:"pas réglé, A et B épuisées",echec:"pas réglé, échec"};
 
 function go(id){
   if(S.page==="e2") S.sit=id;
-  if(DEC[id]&&S.log.length) S.log[S.log.length-1].d=DEC[id];
+  if(S.log.length){const last=S.log[S.log.length-1];if(DEC[id])last.d=DEC[id];last.info=infoPage(last.p)}
   const p=ROUTE[id]||id;
   S.hist.push(S.page);S.visits[p]=(S.visits[p]||0)+1;S.log.push({p,t:LOGTXT[p]||p});
-  S.page=p;render();window.scrollTo({top:0});
+  S.page=p;render();haut();
 }
-function back(){if(!S.hist.length)return;const l=S.log.pop();if(l)S.visits[l.p]--;if(S.log.length)delete S.log[S.log.length-1].d;S.page=S.hist.pop();render()}
+function back(){if(!S.hist.length)return;const l=S.log.pop();if(l)S.visits[l.p]--;if(S.log.length){delete S.log[S.log.length-1].d;delete S.log[S.log.length-1].info}S.page=S.hist.pop();render()}
 function renderLog(){
   const lg=document.getElementById("log");
-  lg.innerHTML=(D()?`<p class="mute" style="margin:0 0 8px"><b>${esc(D().titre)}</b> · suivez les boutons en pointillés</p>`:"")+
+  lg.innerHTML=(D()?`<p class="mute" style="margin:0 0 8px"><b>${esc(D().titre)}</b> ${chem(D().chemin)}<br>Boutons en pointillés : le choix fait dans l'exemple.</p>`:"")+
     (S.log.length?`<ol class="log">${S.log.map(l=>`<li>${esc(l.t)}${l.p==="e1"&&S.esp?" · "+esc(S.esp):""}${l.d?` <span class="mute">→ ${esc(l.d)}</span>`:""}</li>`).join("")}</ol>`:`<p class="mute" style="margin:0">Le parcours s'affichera ici.</p>`);
 }
 function render(){
   const n=num(S.page);
   document.getElementById("rail").innerHTML=ETAPES.slice(1).map((t,i)=>`<div class="dot ${i+1<n?"fait":""} ${i+1===n?"ici":""}"><b>${i+1}</b>${i+1===n?esc(t):""}</div>`).join("");
-  document.getElementById("main").innerHTML=PAGES[S.page]();
+  document.getElementById("main").innerHTML=PAGES[S.page]().replace('<div class="card anim">','<div class="card anim">'+demobar());
+  document.getElementById("prog").style.width=(n/9*100)+"%";
   renderLog();
 }
 const majBilan=()=>{const d=document.getElementById("bilan-dl");if(d)d.innerHTML=dlHTML()};
+const doux=()=>!matchMedia("(prefers-reduced-motion: reduce)").matches;
+function haut(){const r=document.getElementById("rail");const y=r?r.getBoundingClientRect().top+scrollY-8:0;if(scrollY>y)window.scrollTo({top:y,behavior:doux()?"smooth":"auto"})}
 
 document.addEventListener("click",e=>{
   const t=e.target.closest("button");if(!t)return;
   if(t.dataset.go) go(t.dataset.go);
   else if(t.dataset.back!==undefined) back();
-  else if(t.dataset.reset!==undefined){S=neuf();render();window.scrollTo({top:0})}
-  else if(t.dataset.esp){S.esp=t.dataset.esp;S.sel={A:[],B:[],C:[]};render();const f=document.getElementById("fiche");if(f)f.scrollIntoView({behavior:"smooth",block:"start"})}
+  else if(t.dataset.next!==undefined){const c=document.querySelector("#main .opt.demo, #main .btn.demo");if(c)c.click()}
+  else if(t.dataset.reset!==undefined){S=neuf();render();window.scrollTo({top:0,behavior:doux()?"smooth":"auto"})}
+  else if(t.dataset.esp){S.esp=t.dataset.esp;S.sel={A:[],B:[],C:[]};render();const f=document.getElementById("fiche");if(f)f.scrollIntoView({behavior:doux()?"smooth":"auto",block:"start"})}
   else if(t.dataset.delai){S[t.dataset.delai]=t.dataset.val;render()}
   else if(t.dataset.print!==undefined){majBilan();try{window.print()}catch(_){}}
   else if(t.dataset.mail!==undefined){
@@ -425,9 +465,9 @@ document.addEventListener("click",e=>{
     location.href="mailto:"+DAQ.courriel+"?subject="+encodeURIComponent(sujet)+"&body="+encodeURIComponent(bilanTexte()+"\n\n(PDF du bilan joint, le cas échéant)");
   }
   else if(t.dataset.demo){
-    const k=t.dataset.demo,d=DEMOS[k],s=DEMO_SEL[k];S=neuf();S.demo=k;S.esp=d.esp;
-    const f=fiche();S.causes=[...s.causes];S.acteurs=[...s.acteurs];
-    ["A","B","C"].forEach(m=>S.sel[m]=s[m].map(i=>f[m][i]).filter(Boolean));
+    const k=t.dataset.demo,d=DEMOS[k],s=d.sel;S=neuf();S.demo=k;S.esp=d.esp;
+    S.causes=[...s.causes];S.acteurs=[...s.acteurs];["A","B","C"].forEach(m=>S.sel[m]=[...s[m]]);
+    Object.assign(S.autre,d.autre||{});S.delai=d.delai||"";Object.assign(S.bil,d.bilan||{});
     go("e1");
   }
   else if(t.id==="copier"){
