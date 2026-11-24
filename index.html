@@ -3,19 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cohabiter : que faire ?</title>
+<title>Cohabiter : que faire ? · DAQ</title>
+<meta name="description" content="Outil de la Communauté Droit animalier Québec pour cohabiter avec les êtres animaux liminaires, étape par étape.">
 <link rel="icon" href="logo-daq.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
 /* VOICE: calme, concret, niveau lycée ; un guichet municipal bienveillant
    IDEA: l'arbre de décision imprimé, déplié en parcours page par page
-   PICTURE: le rail des 9 étapes, toujours visible, et la carte de l'étape en cours
+   PICTURE: le rail des 9 étapes et la carte de l'étape en cours ; photos des espèces
    COLOUR and TYPE: blanc, bleu DAQ #0074CD ; vert A/B, orange C, rouge D, violet "rien n'est fait" ; Atkinson Hyperlegible
-   LAYOUT: barre logo, bandeau bleu, rail, carte centrale + "Votre parcours" à droite (dessous sur téléphone) */
-:root{color-scheme:light dark;
---bg:light-dark(#f4f7fb,#0e1622);--card:light-dark(#fff,#16212f);--ink:light-dark(#14202e,#e8eef6);--mute:light-dark(#566577,#9fb0c3);
---line:light-dark(#d9e1ea,#2a394b);--blue:#0074CD;--bluet:light-dark(#0062ad,#6db8f2);--blue2:light-dark(#e3f0fb,#12304d);
+   LAYOUT: barre logo, bandeau bleu, rail, carte centrale + "Votre parcours" (dessous sur tablette portrait et téléphone) */
+:root{color-scheme:light dark;--maxw:1680px;--gut:max(3vw,16px);--padx:max(var(--gut),calc((100% - var(--maxw))/2 + var(--gut)));
+--bg:light-dark(#f2f6fb,#0e1622);--card:light-dark(#fff,#16212f);--ink:light-dark(#14202e,#e8eef6);--mute:light-dark(#526174,#a3b3c6);
+--line:light-dark(#d6dfe9,#2a394b);--blue:#0074CD;--bluet:light-dark(#0062ad,#6db8f2);--blue2:light-dark(#e3f0fb,#12304d);
 --vert:light-dark(#21804a,#4cc27f);--vertbg:light-dark(#e6f4ec,#13301f);
 --orange:light-dark(#b85f0e,#f0a253);--orangebg:light-dark(#fdf0e2,#3a2610);
 --rouge:light-dark(#b3261e,#f07a72);--rougebg:light-dark(#fbe9e7,#3b1714);
@@ -23,84 +24,114 @@
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif;overflow-x:clip}
-.top{display:flex;align-items:center;gap:14px;background:#fff;color:#14202e;padding-block:10px;padding-inline:max(max(4vw,16px),calc((100% - 1180px)/2 + max(4vw,16px)));border-bottom:1px solid #d9e1ea}
-.top img{height:54px;width:auto}
-.top div{font-size:15px;line-height:1.3}
-.top b{display:block;font-size:16px}
-header{background:var(--blue);color:#fff;padding-block:18px 20px;padding-inline:max(max(4vw,16px),calc((100% - 1180px)/2 + max(4vw,16px)))}
-header h1{margin:0;font-size:clamp(24px,4vw,34px);line-height:1.1;text-wrap:balance}
-header p{margin:6px 0 0;opacity:.92;font-size:16px}
-.draft{display:inline-block;margin-top:10px;font-size:13px;background:#fff;color:#0062ad;padding:3px 10px;border-radius:99px;font-weight:700}
-.rail{display:flex;gap:6px;padding-block:14px;padding-inline:max(max(4vw,16px),calc((100% - 1180px)/2 + max(4vw,16px)));background:var(--card);border-bottom:1px solid var(--line);overflow-x:auto}
-.dot{flex:1 0 34px;text-align:center;font-size:13px;color:var(--mute)}
-.dot b{display:grid;place-items:center;width:34px;height:34px;margin:0 auto 3px;border-radius:50%;border:2px solid var(--line);font-size:15px;background:var(--bg)}
+@media(min-width:1280px){body{font-size:18px}}
+a{color:var(--bluet)}
+.top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:#fff;color:#14202e;padding:12px var(--padx);border-bottom:1px solid #d6dfe9}
+.top img{height:clamp(56px,6vw,88px);width:auto}
+.top .nom{flex:1 1 260px;line-height:1.25}
+.top .nom b{display:block;font-size:clamp(18px,1.8vw,24px)}
+.top .nom span{font-size:clamp(14px,1.2vw,17px);color:#526174}
+.top nav{display:flex;gap:8px;flex-wrap:wrap}
+.top nav a{font-size:15px;font-weight:700;color:#0062ad;text-decoration:none;border:2px solid #cfe3f6;border-radius:99px;padding:8px 14px}
+.top nav a:hover{border-color:#0074CD}
+header{background:var(--blue);color:#fff;padding:clamp(20px,2.6vw,36px) var(--padx)}
+header h1{margin:0;font-size:clamp(26px,3.3vw,46px);line-height:1.08;text-wrap:balance}
+header p{margin:8px 0 0;opacity:.94;font-size:clamp(16px,1.3vw,20px)}
+.draft{display:inline-block;margin-top:14px;font-size:14px;background:#fff;color:#0062ad;padding:4px 12px;border-radius:99px;font-weight:700}
+.rail{display:flex;gap:6px;padding:16px var(--padx);background:var(--card);border-bottom:1px solid var(--line);overflow-x:auto}
+.dot{flex:1 0 38px;text-align:center;font-size:14px;color:var(--mute)}
+.dot b{display:grid;place-items:center;width:38px;height:38px;margin:0 auto 4px;border-radius:50%;border:2px solid var(--line);font-size:16px;background:var(--bg)}
 .dot.fait b{background:var(--blue2);border-color:var(--blue);color:var(--bluet)}
 .dot.ici b{background:var(--blue);border-color:var(--blue);color:#fff}
 .dot.ici{color:var(--ink);font-weight:700}
-.wrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;max-width:1180px;margin:0 auto;padding:24px max(4vw,16px) 40px}
-@media(max-width:860px){.wrap{grid-template-columns:minmax(0,1fr)}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:clamp(18px,3vw,32px)}
+@media(max-width:600px){.dot{font-size:0}.dot b{font-size:15px;width:32px;height:32px}}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;padding:28px var(--padx) 44px}
+@media(max-width:1023px){.wrap{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,40px)}
 .tag{display:inline-block;font-weight:700;font-size:18px;color:var(--bluet);margin-bottom:4px}
-h2{margin:0 0 10px;font-size:clamp(24px,3.4vw,32px);line-height:1.12;text-wrap:balance}
-h3{margin:22px 0 8px;font-size:19px}
+h2{margin:0 0 12px;font-size:clamp(26px,2.6vw,38px);line-height:1.1;text-wrap:balance}
+h3{margin:26px 0 10px;font-size:clamp(19px,1.5vw,22px)}
 h4{margin:14px 0 4px;font-size:16px}
-p{margin:0 0 12px;max-width:68ch}
+p{margin:0 0 12px;max-width:75ch}
 .mute{color:var(--mute);font-size:15px}
-.choices{display:grid;gap:10px;margin:16px 0}
-.opt{display:block;width:100%;text-align:left;font:inherit;color:inherit;background:var(--bg);border:2px solid var(--line);border-left-width:8px;border-radius:12px;padding:14px 16px;cursor:pointer;min-height:44px}
+.choices{display:grid;gap:12px;margin:16px 0}
+@media(min-width:1100px){.choices.deux{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:inherit;background:var(--bg);border:2px solid var(--line);border-left-width:8px;border-radius:12px;padding:16px 18px;cursor:pointer;min-height:44px}
 .opt:hover{border-color:var(--blue)}
-.opt strong{display:block;font-size:18px;margin-bottom:2px}
+.opt strong{display:block;font-size:19px;margin-bottom:2px}
 .opt span{display:block;font-size:16px}
-.opt em{display:block;color:var(--mute);font-size:15px;font-style:normal;margin-top:4px}
+.opt em{display:block;color:var(--mute);font-size:15px;font-style:normal;margin-top:6px}
 .opt.v{border-left-color:var(--vert)}.opt.o{border-left-color:var(--orange)}.opt.r{border-left-color:var(--rouge)}.opt.p{border-left-color:var(--violet);background:var(--violetbg)}.opt.b{border-left-color:var(--blue)}
 .opt.demo,.btn.demo{outline:3px dashed var(--blue);outline-offset:3px}
-button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
-.btn{font:inherit;font-weight:700;border:0;border-radius:10px;padding:12px 20px;min-height:44px;cursor:pointer;background:var(--blue);color:#fff}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;font:inherit;font-weight:700;border:0;border-radius:10px;padding:12px 22px;min-height:46px;cursor:pointer;background:var(--blue);color:#fff;text-decoration:none}
 .btn.sec{background:transparent;color:var(--bluet);border:2px solid var(--blue)}
-.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;align-items:center}
-.grp{margin:14px 0 4px;font-weight:700;font-size:15px;color:var(--mute)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;align-items:center}
+.grp{margin:20px 0 8px;font-weight:700;font-size:15px;color:var(--mute)}
+.sp{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.sp button{display:flex;flex-direction:column;font:inherit;color:inherit;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:0;overflow:hidden;cursor:pointer}
+.sp button:hover{border-color:var(--blue)}
+.sp button.on{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue2)}
+.sp img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--line)}
+.sp span{padding:8px 10px 10px;font-weight:700;font-size:15px;line-height:1.25}
+details.autre{margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+details.autre summary{cursor:pointer;font-weight:700;color:var(--bluet);min-height:44px;display:flex;align-items:center}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips button{font:inherit;font-size:16px;padding:9px 14px;min-height:44px;border-radius:99px;border:2px solid var(--line);background:var(--bg);color:inherit;cursor:pointer}
 .chips button.on{background:var(--blue);border-color:var(--blue);color:#fff}
-.fiche{margin-top:18px;padding:18px;border-radius:12px;background:var(--blue2)}
-.fiche h3{margin:0 0 6px;font-size:22px}
-.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 22px}
+.fiche{border-radius:14px;background:var(--blue2);overflow:hidden}
+.fhead{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+@media(max-width:700px){.fhead{grid-template-columns:minmax(0,1fr)}}
+.fhead figure{margin:0;position:relative}
+.fhead img{width:100%;height:100%;min-height:220px;max-height:340px;object-fit:cover;display:block}
+.fhead figcaption{position:absolute;left:0;right:0;bottom:0;font-size:12px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.6));padding:18px 10px 6px}
+.fhead .txt{padding:20px 22px}
+.fhead h3{margin:0 0 2px;font-size:clamp(24px,2.2vw,32px)}
+.fbody{padding:4px 22px 22px}
+.fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 24px}
+@media(max-width:1100px){.fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.fgrid{grid-template-columns:minmax(0,1fr)}}
-.fgrid p{margin:0 0 6px;font-size:16px}
+.fgrid p,.fhead p,.fbody p{margin:0 0 6px;font-size:16px}
 .pills{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
 .pills span{font-size:14px;padding:3px 10px;border-radius:99px;background:var(--card);border:1px solid var(--line)}
-.mesure{border-radius:12px;padding:16px;margin:14px 0;border:1px solid var(--line)}
+.mesure{border-radius:12px;padding:18px;margin:14px 0;border:1px solid var(--line)}
 .mesure.v{background:var(--vertbg)}.mesure.o{background:var(--orangebg)}.mesure.r{background:var(--rougebg)}
 .mesure h3{margin:0 0 4px}
 .mesure.v h3{color:var(--vert)}.mesure.o h3{color:var(--orange)}.mesure.r h3{color:var(--rouge)}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+@media(max-width:900px){.cols{grid-template-columns:minmax(0,1fr)}}
 .sous{font-weight:700;font-size:15px;margin:10px 0 2px}
 label.ck{display:flex;gap:10px;align-items:flex-start;padding:5px 0;cursor:pointer}
 label.ck input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--blue)}
 .lab{display:block;font-weight:700;font-size:15px;margin:12px 0 4px}
 input[type=text],input[type=date],textarea,select{font:inherit;font-size:16px;width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:inherit}
 textarea{min-height:80px}
-.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}
 @media(max-width:600px){.duo{grid-template-columns:minmax(0,1fr)}}
-.alerte{padding:12px 14px;border-radius:10px;margin:12px 0;font-size:16px}
+.alerte{padding:12px 16px;border-radius:10px;margin:12px 0;font-size:16px}
 .alerte.o{background:var(--orangebg);border-left:6px solid var(--orange)}
 .alerte.p{background:var(--violetbg);border-left:6px solid var(--violet)}
 .alerte.v{background:var(--vertbg);border-left:6px solid var(--vert)}
 .alerte.b{background:var(--blue2);border-left:6px solid var(--blue)}
-.ex{margin:0 0 18px;padding:12px 14px;border-radius:10px;border:2px dashed var(--blue);background:var(--blue2);font-size:16px}
+.ex{margin:0 0 18px;padding:12px 16px;border-radius:10px;border:2px dashed var(--blue);background:var(--blue2);font-size:16px}
 .ex b{color:var(--bluet)}
-aside .card{padding:18px}
-aside h3{margin:0 0 10px;font-size:17px}
-ol.log{margin:0;padding-left:20px;font-size:15px}
+aside .card{padding:20px;position:sticky;top:16px}
+aside h3{margin:0 0 10px;font-size:18px}
+ol.log{margin:0;padding-left:22px;font-size:15px}
 ol.log li{margin-bottom:6px}
-.bilan{margin:0}.bilan dt{font-weight:700;margin-top:10px}.bilan dd{margin:2px 0 0}
-.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 6px}
+.bilan{margin:0;display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:8px 18px}
+.bilan dt{font-weight:700}.bilan dd{margin:0}
+@media(max-width:600px){.bilan{grid-template-columns:minmax(0,1fr);gap:2px}.bilan dd{margin-bottom:8px}}
+.envoi{margin-top:24px;padding:18px;border-radius:12px;background:var(--blue2)}
+.envoi h3{margin:0 0 6px}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:8px 0 6px}
 @media(max-width:700px){.trio{grid-template-columns:minmax(0,1fr)}}
-.trio div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.trio div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
 .trio b{display:block;color:var(--bluet);font-size:14px}
-.trio strong{display:block;font-size:18px;margin:2px 0 4px}
+.trio strong{display:block;font-size:19px;margin:2px 0 4px}
 .trio p{margin:0;font-size:15px;color:var(--mute)}
 .ladder{display:grid;gap:8px;margin:8px 0}
-.ladder div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:center;padding:10px 14px;border-radius:10px}
+.ladder div{display:grid;grid-template-columns:170px minmax(0,1fr);gap:12px;align-items:center;padding:12px 16px;border-radius:10px}
 @media(max-width:500px){.ladder div{grid-template-columns:minmax(0,1fr);gap:2px}}
 .ladder b{font-size:15px}
 .ladder .v{background:var(--vertbg)}.ladder .v b{color:var(--vert)}
@@ -108,15 +139,38 @@ ol.log li{margin-bottom:6px}
 .ladder .r{background:var(--rougebg)}.ladder .r b{color:var(--rouge)}
 .hero{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
 .hero p{margin:0}
-footer a{color:var(--bluet)}
-footer{text-align:center;color:var(--mute);font-size:13px;padding:0 16px 28px}
+.ex3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:900px){.ex3{grid-template-columns:minmax(0,1fr)}}
+.ex3 button{display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;background:var(--bg);border:2px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;padding:0}
+.ex3 button:hover{border-color:var(--blue)}
+.ex3 img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.ex3 span{padding:10px 14px 14px}.ex3 strong{display:block;font-size:17px}
+footer{background:var(--card);border-top:1px solid var(--line);padding:24px var(--padx);display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;font-size:15px;color:var(--mute)}
+footer img{height:56px;width:auto;background:#fff;border-radius:50%}
+footer div{flex:1 1 300px}
+footer b{color:var(--ink)}
+.print-only{display:none}
 @media(prefers-reduced-motion:no-preference){.anim{animation:in .25s ease-out}@keyframes in{from{opacity:0;transform:translateY(6px)}}}
-@media(max-width:600px){.dot{font-size:0}.dot b{font-size:15px}}
-@media print{.top,.rail,aside,footer,.row,.noprint{display:none!important}header{background:none;color:#000;padding:0 0 8px}.draft{border:1px solid #000}.wrap{display:block;padding:0}.card{border:0;padding:0}body{background:#fff;color:#000}}
+@media print{
+  @page{margin:16mm}
+  body{background:#fff;color:#000;font-size:11pt}
+  .top,header,.rail,aside,footer,.row,.noprint,.ex,.tag{display:none!important}
+  .wrap{display:block;padding:0}.card{border:0;padding:0}
+  .print-only{display:block}
+  .pcover{display:flex;align-items:center;gap:16px;border-bottom:3px solid #0074CD;padding-bottom:12px;margin-bottom:16px}
+  .pcover img{height:70px}.pcover b{display:block;font-size:14pt;color:#0074CD}
+  h2{font-size:20pt}
+  .bilan{grid-template-columns:55mm 1fr}.bilan dt,.bilan dd{break-inside:avoid;border-bottom:1px solid #ddd;padding:4px 0}
+  .pfoot{margin-top:18px;font-size:9pt;color:#444;border-top:1px solid #999;padding-top:8px}
+}
 </style>
 </head>
 <body>
-<div class="top"><img src="logo-daq.png" alt="Logo de la Communauté Droit animalier Québec"><div><b>Communauté Droit animalier Québec</b>Outil pour les municipalités et les citoyens</div></div>
+<div class="top">
+  <a href="https://daq.quebec" aria-label="Site de la Communauté Droit animalier Québec"><img src="logo-daq.png" alt="Logo de la Communauté Droit animalier Québec"></a>
+  <div class="nom"><b>Communauté Droit animalier Québec</b><span>Outil pour les municipalités et les citoyens</span></div>
+  <nav aria-label="Liens DAQ"><a href="https://daq.quebec">daq.quebec</a><a href="https://daq.quebec/nous-joindre/">Nous joindre</a></nav>
+</div>
 <header>
   <h1>Cohabiter avec les êtres animaux liminaires : que faire ?</h1>
   <p>Un parcours étape par étape, des mesures les plus simples aux plus lourdes.</p>
@@ -126,24 +180,28 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:0 16px 28px}
 <div class="wrap">
   <main id="main" aria-live="polite"></main>
   <aside>
-    <div class="card"><h3>Votre parcours</h3><div id="log"></div></div>
-    <p class="mute" style="margin-top:12px">Version de travail : les contenus sont en cours de validation par la DAQ et évolueront.</p>
+    <div class="card"><h3>Votre parcours</h3><div id="log"></div>
+    <p class="mute" style="margin:14px 0 0">Version de travail : les contenus sont en cours de validation par la DAQ et évolueront.</p></div>
   </aside>
 </div>
-<footer>© 2026 Communauté Droit animalier Québec (DAQ) · <a href="https://daq.quebec">daq.quebec</a><br>Version de travail, novembre 2026 · contenus en cours de validation</footer>
+<footer>
+  <img src="logo-daq.png" alt="">
+  <div><b>Communauté Droit animalier Québec (DAQ)</b><br>Organisme de bienfaisance voué à l'avancement de l'éthique et du droit animalier au Québec.<br>
+  <a href="https://daq.quebec">daq.quebec</a> · <a href="mailto:info@daq.quebec">info@daq.quebec</a> · <a href="https://daq.quebec/nous-joindre/">Nous joindre</a></div>
+  <div>© 2026 DAQ · Version de travail, novembre 2026.<br>Photos : Wikimedia Commons (auteur et licence indiqués sur chaque fiche).</div>
+</footer>
 
 <script src="contenu.js"></script>
 <script>
 {
-// Choix pré-remplis du mode démo (indices dans les listes de la fiche espèce)
-const DEMO_SEL = {
+const DEMO_SEL={
   ecureuil:{causes:[1],acteurs:[0],A:[0,2],B:[],C:[]},
   raton:{causes:[0],acteurs:[1,2],A:[0],B:[1],C:[]},
   cerf:{causes:[2,3],acteurs:[1,2],A:[0,1],B:[0],C:[]}
 };
 const ETAPES=["","Bien connaître l'espèce","Quelle est la situation ?","Comprendre le problème","Mesures A et B","Réglé ?","Mesure C","Réglé ?","Mesure D, échec","Faire le bilan"];
 const neuf=()=>({page:"start",esp:null,sit:null,causes:[],acteurs:[],sel:{A:[],B:[],C:[]},autre:{causes:"",acteurs:"",A:"",B:"",C:""},
-  delai:"",delaiC:"",rq:{e3:"",e4:"",e6:""},bil:{lieu:"",date:"",resp:"",resultat:"",couts:"",nombre:"",marche:"",pasmarche:"",suite:""},
+  delai:"",delaiC:"",rq:{e3:"",e4:"",e6:""},bil:{org:"",contact:"",lieu:"",date:"",resp:"",resultat:"",couts:"",nombre:"",marche:"",pasmarche:"",suite:""},
   hist:[],log:[],visits:{},demo:null});
 let S=neuf();
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -161,8 +219,8 @@ const mks=(m,list)=>list.map(t=>ck("m"+m,t,t,S.sel[m].includes(t))).join("");
 const txt=(id,val,ph="")=>`<input type="text" data-t="${id}" value="${esc(val)}" placeholder="${esc(ph)}">`;
 const area=(id,val,ph="")=>`<textarea data-t="${id}" placeholder="${esc(ph)}">${esc(val)}</textarea>`;
 const nav=(next,label="Continuer")=>`<div class="row">${S.hist.length?`<button class="btn sec" data-back>Retour</button>`:""}${next?`<button class="btn${D()?" demo":""}" data-go="${next}">${esc(label)}</button>`:""}</div>`;
-const getT=id=>id.split(".").reduce((o,k)=>o[k],S);
 const setT=(id,v)=>{const ks=id.split(".");const last=ks.pop();ks.reduce((o,k)=>o[k],S)[last]=v};
+const auj=()=>new Date().toLocaleDateString("fr-CA",{day:"numeric",month:"long",year:"numeric"});
 
 function delaiBloc(key,label){
   const f=fiche();const val=S[key];
@@ -175,32 +233,40 @@ function mesureBloc(m,cls,titre,generales){
   const f=fiche();const propres=f?f[m]:[];
   const autres=generales.filter(t=>!propres.includes(t));
   return `<div class="mesure ${cls}"><h3>MESURE ${m} · ${esc(titre)}</h3>
-    ${propres.length?`<div class="sous">Mesures suggérées : ${esc(f.nom)}</div>${mks(m,propres)}`:""}
-    <div class="sous">${propres.length?"Autres exemples de mesures":"Exemples de mesures"}</div>${mks(m,autres)}
+    <div class="cols">
+      ${propres.length?`<div><div class="sous">Mesures suggérées : ${esc(f.nom)}</div>${mks(m,propres)}</div>`:""}
+      <div><div class="sous">${propres.length?"Autres exemples de mesures":"Exemples de mesures"}</div>${mks(m,autres)}</div>
+    </div>
     <span class="lab">Autre mesure ${m} (à préciser)</span>${txt("autre."+m,S.autre[m],"Décrire la mesure")}</div>`;
 }
 function ficheHTML(f){
   const direct=[...f.grille].map((c,i)=>c==="D"?TYPES_NUISANCES[i]:null).filter(Boolean);
-  return `<div class="fiche anim"><h3>${esc(f.nom)}</h3><p class="mute" style="margin:0 0 10px">${esc(f.groupe)}</p>
-  <div class="fgrid">
-    <div><h4>Mode de vie</h4><p>${esc(f.vie)}</p></div>
+  return `<div class="fiche anim" id="fiche">
+  <div class="fhead"><figure><img src="${esc(f.photo)}" alt="${esc(f.nom)}"><figcaption>${esc(f.credit)}</figcaption></figure>
+    <div class="txt"><h3>${esc(f.nom)}</h3><p class="mute" style="margin:0 0 12px">${esc(f.groupe)}</p>
+      <h4>Mode de vie</h4><p>${esc(f.vie)}</p><h4>Son rôle et ce qu'il apporte</h4><p>${esc(f.role)}</p></div></div>
+  <div class="fbody"><div class="fgrid">
     <div><h4>Ses besoins</h4><p>${esc(f.besoins)}</p></div>
     <div><h4>Période de reproduction</h4><p>${esc(f.repro)}</p></div>
     <div><h4>L'hiver</h4><p>${esc(f.hiver)}</p></div>
-    <div><h4>Son rôle et ce qu'il apporte</h4><p>${esc(f.role)}</p></div>
-    <div><h4>Causes fréquentes de conflit</h4><p>${esc(f.causes)}</p></div>
   </div>
+  <h4>Causes fréquentes de conflit</h4><p>${esc(f.causes)}</p>
   <h4>Nuisances relevées (grille DAQ, 2026)</h4>
   ${direct.length?`<div class="pills">${direct.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:`<p>Aucune nuisance directe relevée.</p>`}
   <p class="mute" style="margin:0">${esc(f.profil)} Les autres types de nuisances sont faibles, sans source ou inexistants.</p>
-  <div class="alerte o" style="margin-bottom:0"><b>Attention :</b> ${esc(f.attention)}</div></div>`;
+  <div class="alerte o" style="margin-bottom:0"><b>Attention :</b> ${esc(f.attention)}</div></div></div>`;
 }
+function grille(){
+  const groupes=[...new Set(ESPECES.map(e=>e.groupe))];
+  return groupes.map(g=>`<div class="grp">${esc(g)}</div><div class="sp">${ESPECES.filter(e=>e.groupe===g).map(e=>`<button data-esp="${esc(e.nom)}" class="${S.esp===e.nom?"on":""}"><img src="${esc(e.photo)}" alt="" loading="lazy"><span>${esc(e.nom)}</span></button>`).join("")}</div>`).join("");
+}
+const photoDe=n=>(ESPECES.find(e=>e.nom===n)||{}).photo||"";
 
 const PAGES={
   start:()=>`<div class="card anim">
     <h2>Un être animal sauvage est observé ou signalé ?</h2>
     <p>Cet outil aide les municipalités et les citoyens à trouver une réponse adaptée, étape par étape. On commence toujours par les mesures qui ne touchent pas l'être animal, et on garde une trace de ce qui a été fait.</p>
-    <div class="hero"><p class="mute">9 étapes · environ 10 minutes · un bilan à conserver à la fin</p><button class="btn" data-go="e1">Commencer</button></div>
+    <div class="hero"><p class="mute">9 étapes · environ 10 minutes · un bilan à conserver ou à transmettre à la fin</p><button class="btn" data-go="e1">Commencer</button></div>
     <h3>Comment ça marche</h3>
     <div class="trio">
       <div><b>ÉTAPES 1 à 3</b><strong>Comprendre</strong><p>Connaître l'espèce, décrire la situation, trouver la cause et qui peut agir.</p></div>
@@ -216,14 +282,12 @@ const PAGES={
     </div>
     <h3>Voir un exemple</h3>
     <p class="mute">Trois situations réelles, parcourues étape par étape.</p>
-    <div class="choices">${Object.entries(DEMOS).map(([k,d])=>`<button class="opt b" data-demo="${k}"><strong>${esc(d.titre)}</strong><span>${esc(d.sous)}</span></button>`).join("")}</div></div>`,
-  e1:()=>{const groupes=[...new Set(ESPECES.map(e=>e.groupe))];return `<div class="card anim">${tag(1)}<h2>Bien connaître l'espèce</h2>${note("e1")}
-    <p>De quelle espèce s'agit-il ? Sa fiche s'affiche en dessous.</p>
-    ${groupes.map(g=>`<div class="grp">${esc(g)}</div><div class="chips">${ESPECES.filter(e=>e.groupe===g).map(e=>`<button data-esp="${esc(e.nom)}" class="${S.esp===e.nom?"on":""}">${esc(e.nom)}</button>`).join("")}</div>`).join("")}
-    ${fiche()?ficheHTML(fiche()):""}
-    ${nav(S.esp?"e2":null)}</div>`},
+    <div class="ex3">${Object.entries(DEMOS).map(([k,d])=>`<button data-demo="${k}"><img src="${esc(photoDe(d.esp))}" alt=""><span><strong>${esc(d.titre)}</strong>${esc(d.sous)}</span></button>`).join("")}</div></div>`,
+  e1:()=>`<div class="card anim">${tag(1)}<h2>Bien connaître l'espèce</h2>${note("e1")}
+    ${fiche()?`${ficheHTML(fiche())}${nav("e2")}<details class="autre"><summary>Choisir une autre espèce</summary>${grille()}</details>`
+      :`<p>De quelle espèce s'agit-il ? Cliquez sur sa photo pour voir sa fiche.</p>${grille()}${nav(null)}`}</div>`,
   e2:()=>{const s=SITUATIONS;return `<div class="card anim">${tag(2)}<h2>Quelle est la situation ?</h2>${note("e2")}
-    <div class="choices">
+    <div class="choices deux">
       ${opt("e2","presence","v",s.presence.titre,s.presence.texte,s.presence.ex)}
       ${opt("e2","nuisance","b",s.nuisance.titre,s.nuisance.texte,s.nuisance.ex)}
       ${opt("e2","imprevisible","o",s.imprevisible.titre,s.imprevisible.texte,s.imprevisible.ex)}
@@ -237,10 +301,13 @@ const PAGES={
   e3:()=>{const f=fiche();return `<div class="card anim">${tag(3)}<h2>Comprendre le problème</h2>${note("e3")}
     ${S.sit==="imprevisible"?`<div class="alerte o">Situation imprévisible : la première intervention doit être rapide et la moins invasive possible. Ensuite, on cherche la cause.</div>`:""}
     ${S.sit==="connu"?`<div class="alerte p">Le problème est connu depuis longtemps : il faut agir dès maintenant.</div>`:""}
-    <h3>Quelle est la cause ?</h3><p class="mute">Elle est souvent liée à nos activités.</p>
     ${f?`<div class="alerte b"><b>Causes fréquentes (${esc(f.nom)}) :</b> ${esc(f.causes)}</div>`:""}
-    ${cks("causes",CAUSES)}<span class="lab">Autre cause</span>${txt("autre.causes",S.autre.causes,"Décrire la cause")}
-    <h3>Qui peut agir ?</h3>${cks("acteurs",ACTEURS)}<span class="lab">Autre</span>${txt("autre.acteurs",S.autre.acteurs,"Ex. association de quartier")}
+    <div class="cols">
+      <div><h3>Quelle est la cause ?</h3><p class="mute">Elle est souvent liée à nos activités.</p>
+        ${cks("causes",CAUSES)}<span class="lab">Autre cause</span>${txt("autre.causes",S.autre.causes,"Décrire la cause")}</div>
+      <div><h3>Qui peut agir ?</h3><p class="mute">Une ou plusieurs réponses.</p>
+        ${cks("acteurs",ACTEURS)}<span class="lab">Autre</span>${txt("autre.acteurs",S.autre.acteurs,"Ex. association de quartier")}</div>
+    </div>
     <span class="lab">Remarques</span>${area("rq.e3",S.rq.e3,"Ce qu'on sait déjà, depuis quand, où exactement")}
     ${nav("e4")}</div>`},
   e4:()=>`<div class="card anim">${tag(4)}<h2>Mesures d'intervention A et B, étape par étape</h2>${note("e4")}
@@ -271,12 +338,17 @@ const PAGES={
   e8:()=>`<div class="card anim">${tag(8,"MESURE D, ÉCHEC")}<h2>Mise à mort volontaire</h2>${note("e8")}
     <div class="mesure r"><h3>MESURE D, ÉCHEC</h3><p style="margin:0">En dernier recours, en conformité avec la loi. Toutes les mesures A, B et C doivent avoir été essayées et documentées. C'est un échec de la cohabitation : le bilan doit expliquer pourquoi.</p></div>
     ${nav("e9","Faire le bilan")}</div>`,
-  e9:()=>{const b=S.bil;return `<div class="card anim">${tag(9)}<h2>Faire le bilan</h2>${note("e9")}
-    <p>Ce qui a été fait et ce que ça a donné, chiffré et documenté, à réutiliser si la situation se reproduit. Tous les champs sont libres.</p>
-    <dl class="bilan">${bilanItems().map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+  e9:()=>{const b=S.bil;return `<div class="card anim">
+    <div class="print-only pcover"><img src="logo-daq.png" alt=""><div><b>Communauté Droit animalier Québec</b>Bilan d'intervention · Cohabiter avec les êtres animaux liminaires<br>Bilan établi le ${esc(auj())}</div></div>
+    ${tag(9)}<h2>Faire le bilan</h2>${note("e9")}
+    <p class="noprint">Ce qui a été fait et ce que ça a donné, chiffré et documenté, à réutiliser si la situation se reproduit. Complétez les champs ci-dessous : le récapitulatif se met à jour.</p>
+    <dl class="bilan" id="bilan-dl">${dlHTML()}</dl>
     <div class="noprint">
     <h3>Compléter le bilan</h3>
-    <div class="duo"><div><span class="lab">Lieu</span>${txt("bil.lieu",b.lieu,"Rue, quartier, parc")}</div>
+    <div class="duo">
+      <div><span class="lab">Municipalité ou organisme</span>${txt("bil.org",b.org,"Ex. Ville de Sherbrooke")}</div>
+      <div><span class="lab">Personne à joindre</span>${txt("bil.contact",b.contact,"Nom, courriel ou téléphone")}</div>
+      <div><span class="lab">Lieu</span>${txt("bil.lieu",b.lieu,"Rue, quartier, parc")}</div>
       <div><span class="lab">Date de début</span><input type="date" data-t="bil.date" value="${esc(b.date)}"></div>
       <div><span class="lab">Responsable du suivi</span>${txt("bil.resp",b.resp,"Personne ou service")}</div>
       <div><span class="lab">Résultat</span><select data-t="bil.resultat">${["","Réglé","Réglé en partie","Pas réglé"].map(o=>`<option ${b.resultat===o?"selected":""}>${o}</option>`).join("")}</select></div>
@@ -285,19 +357,23 @@ const PAGES={
     <span class="lab">Ce qui a marché</span>${area("bil.marche",b.marche)}
     <span class="lab">Ce qui n'a pas marché</span>${area("bil.pasmarche",b.pasmarche)}
     <span class="lab">À refaire ou à éviter si la situation se reproduit</span>${area("bil.suite",b.suite)}
+    <div class="envoi"><h3>Conserver et transmettre le bilan</h3>
+      <p>Imprimez le bilan ou enregistrez-le en PDF (choisir « Enregistrer au format PDF » comme imprimante). Vous pouvez aussi l'envoyer à la DAQ : votre logiciel de courriel s'ouvre avec le bilan déjà rédigé, et vous pouvez y joindre le PDF.</p>
+      <div class="row" style="margin-top:8px"><button class="btn" data-print>Imprimer ou enregistrer en PDF</button><button class="btn" data-mail>Envoyer le bilan à la DAQ</button><button class="btn sec" id="copier">Copier le bilan</button></div>
+      <p class="mute" id="copie" style="margin:10px 0 0">Adresse de la DAQ : ${esc(DAQ.courriel)}</p></div>
     </div>
-    <div class="row"><button class="btn" data-print>Imprimer ou enregistrer en PDF</button><button class="btn sec" id="copier">Copier le bilan</button><span id="copie" class="mute"></span></div>
+    <div class="print-only pfoot">Bilan produit avec l'outil en ligne « Cohabiter avec les êtres animaux liminaires : que faire ? » de la Communauté Droit animalier Québec (version de travail) · ${esc(DAQ.site.replace("https://",""))} · ${esc(DAQ.courriel)}</div>
     <div class="row"><button class="btn sec" data-go="e2">Si le problème revient : ÉTAPE 2</button><button class="btn sec" data-reset>Nouveau parcours</button></div></div>`}
 };
 
 function bilanItems(){
   const pick=(k,l)=>S[k].map(i=>l[i]);
   const add=(a,x)=>a.concat(x?[x]:[]);
-  const sit=S.sit?SITUATIONS[S.sit].titre:"–";
-  const b=S.bil;
-  const it=[["Espèce",S.esp||"–"],["Situation",sit],
+  const b=S.bil;const it=[];
+  [["Municipalité ou organisme",b.org],["Personne à joindre",b.contact],["Lieu",b.lieu],["Date de début",b.date]].forEach(([k,v])=>{if(v) it.push([k,v])});
+  it.push(["Espèce",S.esp||"–"],["Situation",S.sit?SITUATIONS[S.sit].titre:"–"],
     ["Cause",add(pick("causes",CAUSES),S.autre.causes).join(" ; ")||"–"],
-    ["Qui peut agir",add(pick("acteurs",ACTEURS),S.autre.acteurs).join(" ; ")||"–"]];
+    ["Qui peut agir",add(pick("acteurs",ACTEURS),S.autre.acteurs).join(" ; ")||"–"]);
   if(S.rq.e3) it.push(["Remarques (étape 3)",S.rq.e3]);
   ["A","B","C"].forEach(m=>{const l=add(S.sel[m],S.autre[m]);if(l.length) it.push(["MESURE "+m,l.join(" ; ")])});
   if(S.delai) it.push(["Délai pour les mesures A et B",S.delai]);
@@ -306,13 +382,15 @@ function bilanItems(){
   if(S.rq.e6) it.push(["Remarques (mesure C)",S.rq.e6]);
   if(S.log.some(l=>l.p==="e8")) it.push(["MESURE D, ÉCHEC","Mise à mort volontaire"]);
   it.push(["Étapes suivies",S.log.map(l=>l.t+(l.d?" ("+l.d+")":"")).join(" → ")||"–"]);
-  [["Lieu",b.lieu],["Date de début",b.date],["Responsable du suivi",b.resp],["Résultat",b.resultat],["Coûts",b.couts],["Êtres animaux concernés",b.nombre],["Ce qui a marché",b.marche],["Ce qui n'a pas marché",b.pasmarche],["À refaire ou à éviter",b.suite]].forEach(([k,v])=>{if(v) it.push([k,v])});
+  [["Responsable du suivi",b.resp],["Résultat",b.resultat],["Coûts",b.couts],["Êtres animaux concernés",b.nombre],["Ce qui a marché",b.marche],["Ce qui n'a pas marché",b.pasmarche],["À refaire ou à éviter",b.suite]].forEach(([k,v])=>{if(v) it.push([k,v])});
   return it;
 }
+const dlHTML=()=>bilanItems().map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
+const bilanTexte=()=>"Bilan d'intervention · Cohabiter avec les êtres animaux liminaires\nÉtabli le "+auj()+"\n\n"+bilanItems().map(([k,v])=>k+" : "+v).join("\n");
 const LOGTXT={e1:"ÉTAPE 1",e2:"ÉTAPE 2",pres:"Simple présence",e3:"ÉTAPE 3",e4:"ÉTAPE 4",e5:"ÉTAPE 5",e6:"ÉTAPE 6 · MESURE C",e7:"ÉTAPE 7",e8:"ÉTAPE 8 · MESURE D",e9:"ÉTAPE 9"};
 const ROUTE={presence:"pres",nuisance:"e3",imprevisible:"e3",connu:"e3",ok:"e9",autres:"e4",epuisees:"e6",echec:"e8"};
-
 const DEC={presence:"simple présence",nuisance:"nuisance",imprevisible:"situation imprévisible",connu:"problème connu, rien n'est fait",ok:"réglé",autres:"pas réglé, autres mesures A et B",epuisees:"pas réglé, A et B épuisées",echec:"pas réglé, échec"};
+
 function go(id){
   if(S.page==="e2") S.sit=id;
   if(DEC[id]&&S.log.length) S.log[S.log.length-1].d=DEC[id];
@@ -332,15 +410,20 @@ function render(){
   document.getElementById("main").innerHTML=PAGES[S.page]();
   renderLog();
 }
+const majBilan=()=>{const d=document.getElementById("bilan-dl");if(d)d.innerHTML=dlHTML()};
 
 document.addEventListener("click",e=>{
   const t=e.target.closest("button");if(!t)return;
   if(t.dataset.go) go(t.dataset.go);
   else if(t.dataset.back!==undefined) back();
   else if(t.dataset.reset!==undefined){S=neuf();render();window.scrollTo({top:0})}
-  else if(t.dataset.esp){S.esp=t.dataset.esp;S.sel={A:[],B:[],C:[]};render()}
+  else if(t.dataset.esp){S.esp=t.dataset.esp;S.sel={A:[],B:[],C:[]};render();const f=document.getElementById("fiche");if(f)f.scrollIntoView({behavior:"smooth",block:"start"})}
   else if(t.dataset.delai){S[t.dataset.delai]=t.dataset.val;render()}
-  else if(t.dataset.print!==undefined){try{window.print()}catch(_){}}
+  else if(t.dataset.print!==undefined){majBilan();try{window.print()}catch(_){}}
+  else if(t.dataset.mail!==undefined){
+    const sujet="Bilan d'intervention"+(S.esp?" · "+S.esp:"")+(S.bil.org?" · "+S.bil.org:"");
+    location.href="mailto:"+DAQ.courriel+"?subject="+encodeURIComponent(sujet)+"&body="+encodeURIComponent(bilanTexte()+"\n\n(PDF du bilan joint, le cas échéant)");
+  }
   else if(t.dataset.demo){
     const k=t.dataset.demo,d=DEMOS[k],s=DEMO_SEL[k];S=neuf();S.demo=k;S.esp=d.esp;
     const f=fiche();S.causes=[...s.causes];S.acteurs=[...s.acteurs];
@@ -348,9 +431,8 @@ document.addEventListener("click",e=>{
     go("e1");
   }
   else if(t.id==="copier"){
-    const txt="Bilan du parcours\n"+bilanItems().map(([k,v])=>k+" : "+v).join("\n");
     const m=document.getElementById("copie");
-    try{navigator.clipboard.writeText(txt).then(()=>m.textContent="Bilan copié.",()=>m.textContent="Copie impossible ici : sélectionnez le texte à la main.")}catch(_){m.textContent="Copie impossible ici."}
+    try{navigator.clipboard.writeText(bilanTexte()).then(()=>m.textContent="Bilan copié.",()=>m.textContent="Copie impossible ici : sélectionnez le texte à la main.")}catch(_){m.textContent="Copie impossible ici."}
   }
 });
 document.addEventListener("change",e=>{
@@ -360,11 +442,12 @@ document.addEventListener("change",e=>{
     else{const v=+el.dataset.v;S[k]=el.checked?[...new Set([...S[k],v])]:S[k].filter(x=>x!==v)}
     renderLog();
   }
-  if(el.dataset.t&&el.tagName==="SELECT") setT(el.dataset.t,el.value);
+  if(el.dataset.t&&el.tagName==="SELECT"){setT(el.dataset.t,el.value);majBilan()}
 });
 document.addEventListener("input",e=>{
   const id=e.target.dataset.t;if(!id)return;setT(id,e.target.value);
-  if((id==="delai"||id==="delaiC")) document.querySelectorAll(`[data-delai="${id}"]`).forEach(b=>b.classList.remove("on"));
+  if(id==="delai"||id==="delaiC") document.querySelectorAll(`[data-delai="${id}"]`).forEach(b=>b.classList.remove("on"));
+  if(id.startsWith("bil.")) majBilan();
 });
 render();
 }
