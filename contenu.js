@@ -9,8 +9,8 @@
 // Les 10 types de nuisances de la grille DAQ (août 2026)
 const TYPES_NUISANCES = ["Interactions physiques directes","Risques routiers","Risques pour la santé","Salubrité et contamination","Dommages aux bâtiments et équipements","Coûts économiques","Menaces pour d'autres êtres animaux","Impacts sur les cultures et élevages","Impacts écologiques","Nuisances sensorielles (bruit, odeur)"];
 
-// Coordonnées de la DAQ (bilan à envoyer, pied de page)
-const DAQ = {nom:"Communauté Droit animalier Québec", courriel:"info@daq.quebec", site:"https://daq.quebec", contact:"https://daq.quebec/nous-joindre/"};
+// Coordonnées du DAQ (bilan à envoyer, pied de page)
+const DAQ = {nom:"Droit animalier Québec (DAQ)", courriel:"info@daq.quebec", site:"https://daq.quebec", contact:"https://daq.quebec/nous-joindre/"};
 
 // Délais proposés à l'étape 4 et à l'étape 6
 const DELAIS = ["1 semaine","2 semaines","1 mois","3 mois","Une saison complète","Un an"];
@@ -164,7 +164,7 @@ const ESPECES = [
   causes:"Nourrissage, absence de prédateurs, boisés isolés entourés de routes et de quartiers.",
   A:["Interdire et faire cesser le nourrissage","Panneaux, réduction de la vitesse et éclairage aux points de collision","Clôtures autour des jardins et des plantations ; plantes moins appréciées des cerfs"],
   B:["Répulsifs sur les plantes","Effarouchement"],
-  C:["Contrôle de la fertilité (priorité du Guide d'intervention auprès des cerfs de Virginie de la DAQ, 2024)"],
+  C:["Contrôle de la fertilité (priorité du Guide d'intervention auprès des cerfs de Virginie du DAQ, 2024)"],
   delai:"Une saison complète pour les mesures A et B ; plusieurs années pour le contrôle de la fertilité",
   attention:"Un faon seul n'est pas abandonné : sa mère le laisse caché et revient le nourrir. Ne pas le toucher. Nourrir les cerfs est interdit au Québec depuis 2023. Un cerf blessé, mort ou coincé se signale à SOS Braconnage – Urgence faune sauvage, 1 800 463-2191.",
   sources:[{t:"Québec.ca · Fiche Cerf de Virginie",u:"https://www.quebec.ca/agriculture-environnement-et-ressources-naturelles/faune/animaux-sauvages-quebec/fiches-especes-fauniques/cerf-virginie"},{t:"DAQ · Guide d’intervention auprès des cerfs de Virginie (2024)",u:"https://daq.quebec"},{t:"Québec.ca · Bonnes pratiques pour cohabiter avec les animaux sauvages",u:"https://www.quebec.ca/agriculture-environnement-et-ressources-naturelles/faune/cohabiter-animaux-sauvages/bonnes-pratiques"}]},

@@ -3,53 +3,69 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cohabiter : que faire ? · DAQ</title>
-<meta name="description" content="Outil de la Communauté Droit animalier Québec pour cohabiter avec les êtres animaux liminaires, étape par étape.">
+<title>Cohabiter avec les êtres animaux liminaires · Droit animalier Québec (DAQ)</title>
+<meta name="description" content="Outil du DAQ (Droit animalier Québec) pour cohabiter avec les êtres animaux liminaires, étape par étape.">
 <link rel="icon" href="logo-daq.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Serif+Display&display=swap">
 <style>
 /* VOICE: calme, concret, niveau lycée ; un guichet municipal bienveillant
    IDEA: l'arbre de décision imprimé, déplié en parcours page par page
    PICTURE: le rail des 9 étapes et la carte de l'étape en cours ; photos des espèces
-   COLOUR and TYPE: blanc, bleu DAQ #0074CD ; vert A/B, orange C, rouge D, violet "rien n'est fait" ; Atkinson Hyperlegible
+   COLOUR and TYPE: blanc, bleu DAQ #0071C1 ; vert A/B, orange C, rouge D, violet "rien n'est fait" ; Atkinson Hyperlegible
    LAYOUT: barre logo, bandeau bleu, rail, carte centrale + "Votre parcours" (dessous sur tablette portrait et téléphone) */
-:root{color-scheme:light dark;--maxw:1680px;--gut:max(3vw,16px);--padx:max(var(--gut),calc((100% - var(--maxw))/2 + var(--gut)));
---bg:light-dark(#f2f6fb,#0e1622);--card:light-dark(#fff,#16212f);--ink:light-dark(#14202e,#e8eef6);--mute:light-dark(#526174,#a3b3c6);
---line:light-dark(#d6dfe9,#2a394b);--blue:#0074CD;--bluet:light-dark(#0062ad,#6db8f2);--blue2:light-dark(#e3f0fb,#12304d);
+:root{color-scheme:light;--maxw:1680px;--gut:max(3vw,16px);--padx:max(var(--gut),calc((100% - var(--maxw))/2 + var(--gut)));
+--bg:light-dark(#f7f8fa,#0e1622);--card:light-dark(#fff,#16212f);--ink:light-dark(#14202e,#e8eef6);--mute:light-dark(#526174,#a3b3c6);
+--line:light-dark(#d6dfe9,#2a394b);--blue:#0071C1;--blue3:#0086FF;--grisp:#f4f4f4;--bluet:light-dark(#0062ad,#6db8f2);--blue2:light-dark(#e3f0fb,#12304d);
 --vert:light-dark(#21804a,#4cc27f);--vertbg:light-dark(#e6f4ec,#13301f);
 --orange:light-dark(#b85f0e,#f0a253);--orangebg:light-dark(#fdf0e2,#3a2610);
 --rouge:light-dark(#b3261e,#f07a72);--rougebg:light-dark(#fbe9e7,#3b1714);
 --violet:light-dark(#6a3fb0,#b495ec);--violetbg:light-dark(#f1ebfb,#2a1c42)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+:root[data-theme]{color-scheme:light}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif;overflow-x:clip}
-@media(min-width:1280px){body{font-size:18px}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Poppins,system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+@media(min-width:1280px){body{font-size:17px}}
 a{color:var(--bluet)}
-.top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;background:#fff;color:#14202e;padding:12px var(--padx);border-bottom:1px solid #d6dfe9}
-.top img{height:clamp(56px,6vw,88px);width:auto}
-.top .nom{flex:1 1 260px;line-height:1.25}
-.top .nom b{display:block;font-size:clamp(18px,1.8vw,24px)}
-.top .nom span{font-size:clamp(14px,1.2vw,17px);color:#526174}
-.top nav{display:flex;gap:8px;flex-wrap:wrap}
-.top nav a{font-size:15px;font-weight:700;color:#0062ad;text-decoration:none;border:2px solid #cfe3f6;border-radius:99px;padding:8px 14px}
-.top nav a:hover{border-color:#0074CD}
-header{background:var(--blue);color:#fff;padding:clamp(20px,2.6vw,36px) var(--padx)}
-header h1{margin:0;font-size:clamp(26px,3.3vw,46px);line-height:1.08;text-wrap:balance}
-header p{margin:8px 0 0;opacity:.94;font-size:clamp(16px,1.3vw,20px)}
-.draft{display:inline-block;margin-top:14px;font-size:14px;background:#fff;color:#0062ad;padding:4px 12px;border-radius:99px;font-weight:700}
+.top{display:flex;align-items:center;gap:14px 28px;flex-wrap:wrap;background:#fff;padding:14px var(--padx)}
+.top .logo img{height:clamp(64px,7vw,118px);width:auto;display:block}
+.soc{display:flex;gap:16px;align-items:center}
+.soc a{color:#0071C1;display:grid;place-items:center;width:28px;height:28px}
+.soc svg{width:18px;height:18px;fill:currentColor}
+.top .acts{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;font:500 15px/1 Poppins,sans-serif;text-decoration:none;border-radius:30px;padding:12px 22px;border:1.5px solid #0071C1;color:#0071C1;background:#fff;transition:background-color .2s,color .2s}
+.pill.plein{background:#0071C1;color:#fff}
+.pill:hover{background:#0071C1;color:#fff}.pill.plein:hover{background:#005a9a}
+@media(max-width:700px){.top .soc{display:none}.top .acts{margin-left:0}.pill{padding:10px 16px;font-size:14px}}
+.menu{background:var(--grisp);padding:0 var(--padx);display:flex;gap:0 28px;flex-wrap:wrap;align-items:center;min-height:62px}
+.menu a,.menu button{font:400 15px Poppins,sans-serif;color:#3a3a3a;text-decoration:none;background:none;border:0;padding:12px 0;cursor:pointer}
+.menu a:hover,.menu button:hover{color:#0071C1}
+.menu .outil{font-weight:600;color:#0071C1}
+.hero{position:relative;overflow:hidden;color:#fff;background:#0b3d66}
+.mosaic{position:absolute;inset:0;display:grid;grid-template-columns:repeat(11,1fr);grid-template-rows:1fr 1fr}
+.mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:800px){.mosaic{grid-template-columns:repeat(6,1fr)}.mosaic img:nth-child(n+13){display:none}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,52,92,.96) 0%,rgba(0,113,193,.9) 55%,rgba(0,113,193,.6) 100%)}
+.hero .in{position:relative;z-index:1;padding:clamp(40px,6vw,96px) var(--padx) clamp(36px,5vw,76px)}
+.hero .sur{font:500 clamp(13px,1.1vw,16px) Poppins,sans-serif;letter-spacing:.08em;text-transform:uppercase;opacity:.92;margin:0 0 12px}
+.hero h1{font:400 clamp(36px,5.2vw,76px)/1.03 "DM Serif Display",Georgia,serif;margin:0;max-width:17ch;text-wrap:balance}
+.hero p.chap{margin:18px 0 0;font-size:clamp(16px,1.35vw,20px);max-width:62ch;opacity:.96}
+.draft{display:inline-block;margin-top:20px;font:600 13px Poppins,sans-serif;letter-spacing:.04em;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.55);color:#fff;padding:6px 14px;border-radius:99px}
+.stitle{margin:44px 0 20px}.stitle:first-child{margin-top:0}
+.stitle small{display:block;font:500 clamp(14px,1.15vw,18px) Poppins,sans-serif;color:#777;text-transform:uppercase;letter-spacing:.02em}
+.stitle b{display:block;font:600 clamp(26px,2.6vw,40px)/1.1 Poppins,sans-serif;color:#0071C1;text-transform:uppercase}
+.stitle::after{content:"";display:block;width:60px;height:3px;background:#0071C1;margin-top:14px}
 .rail{display:flex;gap:6px;padding:16px var(--padx);background:var(--card);border-bottom:1px solid var(--line);overflow-x:auto}
 .dot{flex:1 0 38px;text-align:center;font-size:14px;color:var(--mute)}
 .dot b{display:grid;place-items:center;width:38px;height:38px;margin:0 auto 4px;border-radius:50%;border:2px solid var(--line);font-size:16px;background:var(--bg)}
 .dot.fait b{background:var(--blue2);border-color:var(--blue);color:var(--bluet)}
 .dot.ici b{background:var(--blue);border-color:var(--blue);color:#fff}
 .dot.ici{color:var(--ink);font-weight:700}
-@media(max-width:600px){.dot{font-size:0}.dot b{font-size:15px;width:32px;height:32px}}
+@media(max-width:600px){.rail{gap:2px}.dot{font-size:0;flex:1 0 30px}.dot b{font-size:14px;width:30px;height:30px}}
 .wrap{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;padding:28px var(--padx) 44px}
 @media(max-width:1023px){.wrap{grid-template-columns:minmax(0,1fr)}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(18px,3vw,40px)}
-.tag{display:inline-block;font-weight:700;font-size:18px;color:var(--bluet);margin-bottom:4px}
-h2{margin:0 0 12px;font-size:clamp(26px,2.6vw,38px);line-height:1.1;text-wrap:balance}
+.card{background:var(--card);border:1px solid #e8ecf0;border-radius:24px;padding:clamp(20px,3vw,44px);box-shadow:0 10px 30px -22px rgba(0,40,80,.35)}
+.tag{display:inline-block;font-weight:600;font-size:14px;letter-spacing:.06em;color:#fff;background:#0071C1;border-radius:30px;padding:5px 14px;margin-bottom:12px}
+h2{margin:0 0 12px;font:600 clamp(26px,2.5vw,36px)/1.15 Poppins,sans-serif;color:#1d1d1d;text-wrap:balance}
 h3{margin:26px 0 10px;font-size:clamp(19px,1.5vw,22px)}
 h4{margin:14px 0 4px;font-size:16px}
 p{margin:0 0 12px;max-width:75ch}
@@ -64,23 +80,24 @@ p{margin:0 0 12px;max-width:75ch}
 .opt.v{border-left-color:var(--vert)}.opt.o{border-left-color:var(--orange)}.opt.r{border-left-color:var(--rouge)}.opt.p{border-left-color:var(--violet);background:var(--violetbg)}.opt.b{border-left-color:var(--blue)}
 .opt.demo,.btn.demo{outline:3px dashed var(--blue);outline-offset:3px}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
-.btn{display:inline-flex;align-items:center;font:inherit;font-weight:700;border:0;border-radius:10px;padding:12px 22px;min-height:46px;cursor:pointer;background:var(--blue);color:#fff;text-decoration:none}
+.btn{display:inline-flex;align-items:center;font:500 16px Poppins,sans-serif;border:0;border-radius:30px;padding:13px 26px;min-height:48px;cursor:pointer;background:var(--blue);color:#fff;text-decoration:none}
 .btn.sec{background:transparent;color:var(--bluet);border:2px solid var(--blue)}
 .row{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;align-items:center}
 .grp{margin:20px 0 8px;font-weight:700;font-size:15px;color:var(--mute)}
 .sp{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
-.sp button{display:flex;flex-direction:column;font:inherit;color:inherit;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:0;overflow:hidden;cursor:pointer}
-.sp button:hover{border-color:var(--blue)}
-.sp button.on{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue2)}
-.sp img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--line)}
-.sp span{padding:8px 10px 10px;font-weight:700;font-size:15px;line-height:1.25}
-.fpanel{grid-column:1/-1;margin:4px 0 8px;will-change:transform,opacity}
+.sp>button{display:flex;flex-direction:column;font:inherit;color:inherit;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:0;overflow:hidden;cursor:pointer}
+.sp>button:hover{border-color:var(--blue)}
+.sp>button.on{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue2)}
+.sp>button img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--line)}
+.sp>button span{padding:8px 10px 10px;font-weight:700;font-size:15px;line-height:1.25}
+.fpanel{grid-column:1/-1;margin:4px 0 8px;overflow:hidden}
+.vol{position:fixed;z-index:60;object-fit:cover;pointer-events:none;transform-origin:0 0;box-shadow:0 20px 40px -12px rgba(0,30,60,.45)}
 .fpanel .fiche{border:2px solid var(--blue);box-shadow:0 22px 48px -24px rgba(0,60,110,.5)}
 .fpanel .txt{position:relative}
 .fermer{position:absolute;top:12px;right:12px;width:44px;height:44px;display:grid;place-items:center;padding:0;border-radius:50%;border:0;background:var(--card);color:var(--ink);font:700 26px/1 system-ui,sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18)}
 .fermer:hover{background:var(--blue);color:#fff}
 .fpanel .suite{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
-.sp button.on span{background:var(--blue);color:#fff}
+.sp>button.on span{background:var(--blue);color:#fff}
 details.autre{margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
 details.autre summary{cursor:pointer;font-weight:700;color:var(--bluet);min-height:44px;display:flex;align-items:center}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -133,42 +150,48 @@ ol.log li{margin-bottom:6px}
 .envoi h3{margin:0 0 6px}
 .trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:8px 0 6px}
 @media(max-width:700px){.trio{grid-template-columns:minmax(0,1fr)}}
-.trio div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-.trio b{display:block;color:var(--bluet);font-size:14px}
+.trio div{background:var(--grisp);border:0;border-radius:18px;padding:20px 22px}
+.trio b{display:block;color:#0071C1;font-size:13px;font-weight:600;letter-spacing:.05em}
 .trio strong{display:block;font-size:19px;margin:2px 0 4px}
 .trio p{margin:0;font-size:15px;color:var(--mute)}
 .ladder{display:grid;gap:8px;margin:8px 0}
-.ladder div{display:grid;grid-template-columns:170px minmax(0,1fr);gap:12px;align-items:center;padding:12px 16px;border-radius:10px}
+.ladder div{display:grid;grid-template-columns:170px minmax(0,1fr);gap:12px;align-items:center;padding:14px 20px;border-radius:14px}
 @media(max-width:500px){.ladder div{grid-template-columns:minmax(0,1fr);gap:2px}}
 .ladder b{font-size:15px}
 .ladder .v{background:var(--vertbg)}.ladder .v b{color:var(--vert)}
 .ladder .o{background:var(--orangebg)}.ladder .o b{color:var(--orange)}
 .ladder .r{background:var(--rougebg)}.ladder .r b{color:var(--rouge)}
-.hero{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
-.hero p{margin:0}
+.herorow{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin:18px 0 8px;padding:16px 20px;border-radius:18px;background:var(--grisp)}
+.herorow p{margin:0}
 .ex3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 @media(max-width:900px){.ex3{grid-template-columns:minmax(0,1fr)}}
 .ex3 button{display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;background:var(--bg);border:2px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;padding:0}
 .ex3 button:hover{border-color:var(--blue)}
 .ex3 img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
 .ex3 span{padding:10px 14px 14px}.ex3 strong{display:block;font-size:17px}
-footer{background:var(--card);border-top:1px solid var(--line);padding:24px var(--padx);display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;font-size:15px;color:var(--mute)}
-footer img{height:56px;width:auto;background:#fff;border-radius:50%}
-footer div{flex:1 1 300px}
-footer b{color:var(--ink)}
+footer{background:#fff;border-top:1px solid #eceff2;padding:46px var(--padx) 38px;display:grid;grid-template-columns:1.2fr repeat(3,1fr);gap:28px}
+@media(max-width:900px){footer{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){footer{grid-template-columns:minmax(0,1fr)}}
+.fcol{display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.fcol h4{margin:0 0 6px;font:600 15px Poppins,sans-serif;color:#0071C1;text-transform:uppercase}
+.fcol a,.fcol button{color:#3a3a3a;text-decoration:none;font:400 14px Poppins,sans-serif;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.fcol a:hover,.fcol button:hover{color:#0071C1}
+.fid img{height:100px;width:auto}.fid p{margin:0;font-size:13px;color:#555}
+.fbas{background:var(--grisp);padding:16px var(--padx);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;font-size:12.5px;color:#666}
+.fbas a{color:#333}
 .print-only{display:none}
 .prog{height:4px;background:var(--line)}.prog i{display:block;height:100%;background:var(--blue);transition:width .5s cubic-bezier(.2,.7,.2,1)}
 .dot b{transition:background-color .3s,border-color .3s,color .3s,transform .3s}.dot.ici b{transform:scale(1.08)}
-.opt,.sp button,.ex3 button,.btn,.chips button{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background-color .18s ease}
-@media(hover:hover){.opt:hover,.sp button:hover,.ex3 button:hover{transform:translateY(-2px);box-shadow:0 8px 22px -12px rgba(0,60,110,.45)}.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(0,60,110,.5)}}
+.opt,.sp>button,.ex3 button,.btn,.chips button{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease,background-color .18s ease}
+@media(hover:hover){.opt:hover,.sp>button:hover,.ex3 button:hover{transform:translateY(-2px);box-shadow:0 8px 22px -12px rgba(0,60,110,.45)}.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px -8px rgba(0,60,110,.5)}}
 .btn:active,.opt:active{transform:translateY(0) scale(.99)}
 .demobar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:-6px 0 22px;padding:12px 16px;border-radius:12px;background:var(--blue);color:#fff}
 .demobar b{font-size:16px}.demobar span{font-size:14px;opacity:.92}
 .demobar .sp1{flex:1 1 220px}
 .lecture{display:inline-flex;align-items:center;gap:6px;font-size:13px!important;font-weight:700;background:rgba(255,255,255,.18);border-radius:99px;padding:3px 10px;margin-top:6px;opacity:1!important}
 .card.demo-on{border:2px solid var(--blue);box-shadow:0 0 0 5px var(--blue2)}
-.demo-on .opt:disabled,.demo-on .sp button:disabled,.demo-on .chips button:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none!important;filter:grayscale(.4)}
-.demo-on .sp button.on:disabled,.demo-on .chips button.on:disabled{opacity:1;filter:none}
+.demo-on .opt:disabled,.demo-on .sp>button:disabled,.demo-on .chips button:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none!important;filter:grayscale(.4)}
+.demo-on .sp>button.on:disabled,.demo-on .chips button.on:disabled{opacity:1;filter:none}
 .demo-on label.ck{cursor:default}
 .demo-on input:disabled,.demo-on textarea:disabled,.demo-on select:disabled{opacity:1;color:var(--ink);-webkit-text-fill-color:var(--ink);background:var(--bg);border-style:dashed;cursor:default}
 .demo-on label.ck input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
@@ -193,13 +216,13 @@ ol.trace{margin:6px 0 0;padding-left:22px}ol.trace li{margin-bottom:8px}ol.trace
 @media(prefers-reduced-motion:no-preference){.anim{animation:in .38s cubic-bezier(.2,.7,.2,1) both}@keyframes in{from{opacity:0;transform:translateY(10px)}}html{scroll-behavior:smooth}}
 @media print{
   @page{margin:16mm}
-  .prog,.demobar,.verdict .noprint{display:none!important}
+  .menu,.hero,.fbas,.prog,.demobar,.verdict .noprint{display:none!important}
   body{background:#fff;color:#000;font-size:11pt}
-  .top,header,.rail,aside,footer,.row,.noprint,.ex,.tag{display:none!important}
+  .top,.rail,aside,footer,.row,.noprint,.ex,.tag{display:none!important}
   .wrap{display:block;padding:0}.card{border:0;padding:0}
   .print-only{display:block}
-  .pcover{display:flex;align-items:center;gap:16px;border-bottom:3px solid #0074CD;padding-bottom:12px;margin-bottom:16px}
-  .pcover img{height:70px}.pcover b{display:block;font-size:14pt;color:#0074CD}
+  .pcover{display:flex;align-items:center;gap:16px;border-bottom:3px solid #0071C1;padding-bottom:12px;margin-bottom:16px}
+  .pcover img{height:70px}.pcover b{display:block;font-size:14pt;color:#0071C1}
   h2{font-size:20pt}
   .bilan{grid-template-columns:55mm 1fr}.bilan dt,.bilan dd{break-inside:avoid;border-bottom:1px solid #ddd;padding:4px 0}
   .pfoot{margin-top:18px;font-size:9pt;color:#444;border-top:1px solid #999;padding-top:8px}
@@ -208,32 +231,40 @@ ol.trace{margin:6px 0 0;padding-left:22px}ol.trace li{margin-bottom:8px}ol.trace
 </head>
 <body>
 <div class="top">
-  <a href="https://daq.quebec" aria-label="Site de la Communauté Droit animalier Québec"><img src="logo-daq.png" alt="Logo de la Communauté Droit animalier Québec"></a>
-  <div class="nom"><b>Communauté Droit animalier Québec</b><span>Outil pour les municipalités et les citoyens</span></div>
-  <nav aria-label="Liens DAQ"><a href="https://daq.quebec">daq.quebec</a><a href="https://daq.quebec/nous-joindre/">Nous joindre</a></nav>
+  <a class="logo" href="https://daq.quebec" aria-label="Site du DAQ"><img src="logo-daq.png" alt="Logo du DAQ, Droit animalier Québec"></a>
+  <div class="soc"><a href="https://www.facebook.com/droitanimalierquebec" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8V6.5c0-.8.2-1.3 1.4-1.3H17V2.2C16.7 2.1 15.7 2 14.6 2 12.2 2 10.6 3.4 10.6 6.1V8H8v3.4h2.6V22H14V11.4h2.6L17 8z"/></svg></a><a href="https://www.linkedin.com/company/droit-animalier-quebec/" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg></a><a href="https://www.instagram.com/daq_quebec" aria-label="Instagram"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" style="fill:currentColor;stroke:none"/></svg></a><a href="mailto:info@daq.quebec" aria-label="Courriel"><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2zm2 2v.5l8 5 8-5V7zm16 2.9-8 5-8-5V17h16z"/></svg></a></div>
+  <div class="acts"><a class="pill plein" href="https://daq.quebec/faire-un-don/">Dons - reçus d'impôt</a><a class="pill" href="https://daq.quebec/devenir-membre/">Devenir membre</a></div>
 </div>
-<header>
-  <h1>Cohabiter avec les êtres animaux liminaires : que faire ?</h1>
-  <p>Un parcours étape par étape, des mesures les plus simples aux plus lourdes.</p>
-  <span class="draft">Version de travail</span>
-</header>
+<nav class="menu" aria-label="Menu"><button class="outil" data-home>Outil de cohabitation</button><button data-home data-ancre="exemples">Exemples</button><a href="https://daq.quebec/a-propos/">À propos du DAQ</a><a href="https://daq.quebec/etres-animaux/">Secours animal</a><a href="https://daq.quebec/category/capsules/">Capsules</a><a href="https://daq.quebec/nous-joindre/">Nous joindre</a></nav>
+<section class="hero">
+  <div class="mosaic" aria-hidden="true" id="mosaic"></div>
+  <div class="in">
+    <p class="sur">Un outil du DAQ · Droit animalier Québec</p>
+    <h1>Cohabiter avec les êtres animaux liminaires</h1>
+    <p class="chap">Que faire quand un être animal sauvage est observé ou signalé ? Un parcours étape par étape pour les municipalités et les citoyens, des mesures les plus simples aux plus lourdes.</p>
+    <span class="draft">Version de travail</span>
+  </div>
+</section>
+
 <nav class="rail" id="rail" aria-label="Étapes"></nav>
 <div class="prog" aria-hidden="true"><i id="prog" style="width:0"></i></div>
 <div class="wrap">
   <main id="main" aria-live="polite"></main>
   <aside>
     <div class="card"><h3>Votre parcours</h3><div id="log"></div>
-    <p class="mute" style="margin:14px 0 0">Version de travail : les contenus sont en cours de validation par la DAQ et évolueront.</p></div>
+    <p class="mute" style="margin:14px 0 0">Version de travail : les contenus sont en cours de validation par le DAQ et évolueront.</p></div>
   </aside>
 </div>
 <footer>
-  <img src="logo-daq.png" alt="">
-  <div><b>Communauté Droit animalier Québec (DAQ)</b><br>Organisme de bienfaisance voué à l'avancement de l'éthique et du droit animalier au Québec.<br>
-  <a href="https://daq.quebec">daq.quebec</a> · <a href="mailto:info@daq.quebec">info@daq.quebec</a> · <a href="https://daq.quebec/nous-joindre/">Nous joindre</a></div>
-  <div>© 2026 DAQ · Version de travail, novembre 2026.<br>Photos : Wikimedia Commons (auteur et licence indiqués sur chaque fiche).</div>
+  <div class="fcol fid"><img src="logo-daq.png" alt="Logo du DAQ"><p>Droit animalier Québec</p><div class="soc"><a href="https://www.facebook.com/droitanimalierquebec" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8V6.5c0-.8.2-1.3 1.4-1.3H17V2.2C16.7 2.1 15.7 2 14.6 2 12.2 2 10.6 3.4 10.6 6.1V8H8v3.4h2.6V22H14V11.4h2.6L17 8z"/></svg></a><a href="https://www.linkedin.com/company/droit-animalier-quebec/" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg></a><a href="https://www.instagram.com/daq_quebec" aria-label="Instagram"><svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" style="fill:currentColor;stroke:none"/></svg></a><a href="mailto:info@daq.quebec" aria-label="Courriel"><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2zm2 2v.5l8 5 8-5V7zm16 2.9-8 5-8-5V17h16z"/></svg></a></div></div>
+  <div class="fcol"><h4>L'outil</h4><button data-home>Accueil de l'outil</button><button data-home data-ancre="exemples">Trois exemples réels</button><a href="https://github.com/carlosdu31/daq-outil-cohabitation">Code et notice (GitHub)</a></div>
+  <div class="fcol"><h4>Le DAQ</h4><a href="https://daq.quebec/a-propos/">À propos</a><a href="https://daq.quebec/etres-animaux/">Secours animal</a><a href="https://daq.quebec/category/capsules/">Capsules</a><a href="https://daq.quebec/infolettres-daq/">Infolettres</a></div>
+  <div class="fcol"><h4>Engagement</h4><a href="https://daq.quebec/faire-un-don/">Faire un don</a><a href="https://daq.quebec/devenir-membre/">Devenez membre</a><a href="https://daq.quebec/stages/">Stages</a><a href="https://daq.quebec/nous-joindre/">Nous joindre</a></div>
 </footer>
+<div class="fbas"><span>2026 © Droit animalier Québec - DAQ · Outil en version de travail, contenus en cours de validation · Photos : Wikimedia Commons (auteur et licence sur chaque fiche)</span><a href="https://daq.quebec/politique-confidentialite/">Politique de confidentialité</a></div>
 
-<script src="contenu.js?v=2026-11-24e"></script>
+
+<script src="contenu.js?v=2026-11-24f"></script>
 <script>
 {
 const ETAPES=["","Bien connaître l'espèce","Quelle est la situation ?","Comprendre le problème","Mesures A et B","Réglé ?","Mesure C","Réglé ?","Mesure D, échec","Faire le bilan"];
@@ -307,24 +338,23 @@ const photoDe=n=>(ESPECES.find(e=>e.nom===n)||{}).photo||"";
 
 const PAGES={
   start:()=>`<div class="card anim">
-    <h2>Un être animal sauvage est observé ou signalé ?</h2>
-    <p>Cet outil aide les municipalités et les citoyens à trouver une réponse adaptée, étape par étape. On commence toujours par les mesures qui ne touchent pas l'être animal, et on garde une trace de ce qui a été fait.</p>
-    <div class="hero"><p class="mute">9 étapes · environ 10 minutes · un bilan à conserver ou à transmettre à la fin</p><button class="btn" data-go="e1">Commencer</button></div>
-    <h3>Comment ça marche</h3>
+    <div class="stitle"><small>Avant de commencer</small><b>Le parcours</b></div>
+    <p>Cet outil aide les municipalités et les citoyens à trouver une réponse adaptée lorsqu'un être animal sauvage est observé ou signalé. On commence toujours par les mesures qui ne touchent pas l'être animal, et on garde une trace de ce qui a été fait.</p>
+    <div class="herorow"><p class="mute">9 étapes · environ 10 minutes · un bilan à conserver ou à transmettre au DAQ</p><button class="btn" data-go="e1">Commencer le parcours</button></div>
     <div class="trio">
       <div><b>ÉTAPES 1 à 3</b><strong>Comprendre</strong><p>Connaître l'espèce, décrire la situation, trouver la cause et qui peut agir.</p></div>
       <div><b>ÉTAPES 4 à 8</b><strong>Agir</strong><p>Essayer les mesures dans l'ordre, de la plus douce à la plus lourde, avec un délai pour juger du résultat.</p></div>
       <div><b>ÉTAPE 9</b><strong>Faire le bilan</strong><p>Ce qui a été fait et ce que ça a donné, chiffré et documenté, pour la prochaine fois.</p></div>
     </div>
-    <h3>Les mesures d'intervention</h3>
+    <div class="stitle"><small>De la plus douce à la plus lourde</small><b>Les mesures d'intervention</b></div>
     <div class="ladder">
       <div class="v"><b>MESURE A</b><span>Adapter le lieu et nos habitudes</span></div>
       <div class="v"><b>MESURE B</b><span>Éloigner l'être animal sans le toucher</span></div>
       <div class="o"><b>MESURE C</b><span>Intervenir sur l'être animal sans le tuer</span></div>
       <div class="r"><b>MESURE D, ÉCHEC</b><span>Mise à mort volontaire, en dernier recours, en conformité avec la loi</span></div>
     </div>
-    <h3>Trois exemples réels</h3>
-    <p class="mute">Parcourez un cas réel étape par étape, puis voyez son bilan et les choix faits à chaque étape.</p>
+    <div class="stitle" id="exemples"><small>Trois cas réels</small><b>Exemples</b></div>
+    <p class="mute">Parcourez un cas réel étape par étape, puis consultez son bilan et les choix faits à chaque étape.</p>
     <div class="ex3">${Object.entries(DEMOS).map(([k,d])=>`<button data-demo="${k}"><img src="${esc(photoDe(d.esp))}" alt=""><span>${chem(d.chemin)}<strong>${esc(d.titre)}</strong>${esc(d.sous)}</span></button>`).join("")}</div></div>`,
   e1:()=>`<div class="card anim">${tag(1)}<h2>Bien connaître l'espèce</h2>${note("e1")}
     <p>De quelle espèce s'agit-il ? Cliquez sur sa photo : sa fiche s'ouvre juste en dessous. Cliquez à nouveau pour la refermer.</p>
@@ -382,7 +412,7 @@ const PAGES={
     <div class="mesure r"><h3>MESURE D, ÉCHEC</h3><p style="margin:0">En dernier recours, en conformité avec la loi. Toutes les mesures A, B et C doivent avoir été essayées et documentées. C'est un échec de la cohabitation : le bilan doit expliquer pourquoi.</p></div>
     ${nav("e9","Faire le bilan")}</div>`,
   e9:()=>{const b=S.bil;return `<div class="card anim">
-    <div class="print-only pcover"><img src="logo-daq.png" alt=""><div><b>Communauté Droit animalier Québec</b>Bilan d'intervention · Cohabiter avec les êtres animaux liminaires<br>Bilan établi le ${esc(auj())}</div></div>
+    <div class="print-only pcover"><img src="logo-daq.png" alt=""><div><b>Droit animalier Québec (DAQ)</b>Bilan d'intervention · Cohabiter avec les êtres animaux liminaires<br>Bilan établi le ${esc(auj())}</div></div>
     ${tag(9)}<h2 class="noprint">Faire le bilan</h2>${note("e9")}
     <p class="noprint">Ce qui a été fait et ce que ça a donné, chiffré et documenté, à réutiliser si la situation se reproduit. Complétez les champs ci-dessous : le récapitulatif se met à jour.</p>
     ${D()?`<div class="verdict"><h3>Ce que montre cet exemple</h3><p style="margin:0">${esc(D().verdict)}</p></div>`:""}
@@ -404,11 +434,11 @@ const PAGES={
     <span class="lab">Ce qui n'a pas marché</span>${area("bil.pasmarche",b.pasmarche)}
     <span class="lab">À refaire ou à éviter si la situation se reproduit</span>${area("bil.suite",b.suite)}
     <div class="envoi"><h3>Conserver et transmettre le bilan</h3>
-      <p>Imprimez le bilan ou enregistrez-le en PDF (choisir « Enregistrer au format PDF » comme imprimante). Vous pouvez aussi l'envoyer à la DAQ : votre logiciel de courriel s'ouvre avec le bilan déjà rédigé, et vous pouvez y joindre le PDF.</p>
-      <div class="row" style="margin-top:8px"><button class="btn" data-print>Imprimer ou enregistrer en PDF</button><button class="btn" data-mail>Envoyer le bilan à la DAQ</button><button class="btn sec" id="copier">Copier le bilan</button></div>
-      <p class="mute" id="copie" style="margin:10px 0 0">Adresse de la DAQ : ${esc(DAQ.courriel)}</p></div>
+      <p>Imprimez le bilan ou enregistrez-le en PDF (choisir « Enregistrer au format PDF » comme imprimante). Vous pouvez aussi l'envoyer au DAQ : votre logiciel de courriel s'ouvre avec le bilan déjà rédigé, et vous pouvez y joindre le PDF.</p>
+      <div class="row" style="margin-top:8px"><button class="btn" data-print>Imprimer ou enregistrer en PDF</button><button class="btn" data-mail>Envoyer le bilan au DAQ</button><button class="btn sec" id="copier">Copier le bilan</button></div>
+      <p class="mute" id="copie" style="margin:10px 0 0">Adresse du DAQ : ${esc(DAQ.courriel)}</p></div>
     </div>
-    <div class="print-only pfoot">Bilan produit avec l'outil en ligne « Cohabiter avec les êtres animaux liminaires : que faire ? » de la Communauté Droit animalier Québec (version de travail) · ${esc(DAQ.site.replace("https://",""))} · ${esc(DAQ.courriel)}</div>
+    <div class="print-only pfoot">Bilan produit avec l'outil en ligne « Cohabiter avec les êtres animaux liminaires » du DAQ, Droit animalier Québec (version de travail) · ${esc(DAQ.site.replace("https://",""))} · ${esc(DAQ.courriel)}</div>
     <div class="row"><button class="btn sec" data-go="e2">Si le problème revient : ÉTAPE 2</button><button class="btn sec" data-reset>Nouveau parcours</button></div></div>`}
 };
 
@@ -471,20 +501,33 @@ function render(){
   if(D()&&S.page!=="start") verrouiller();
   renderLog();
 }
+function trouverTuile(nom){return [...document.querySelectorAll("#main [data-esp]")].find(b=>b.dataset.esp===nom)}
+function volPhoto(de,vers,duree,rayonDe,rayonVers){
+  const im=document.createElement("img");im.src=de.src||vers.src;im.className="vol";
+  Object.assign(im.style,{left:de.left+"px",top:de.top+"px",width:de.width+"px",height:de.height+"px",borderRadius:rayonDe});
+  document.body.appendChild(im);
+  const dx=vers.left-de.left,dy=vers.top-de.top,sx=vers.width/de.width,sy=vers.height/de.height;
+  const a=im.animate([{transform:"translate(0,0) scale(1,1)",borderRadius:rayonDe},{transform:`translate(${dx}px,${dy}px) scale(${sx},${sy})`,borderRadius:rayonVers}],{duration:duree,easing:"cubic-bezier(.2,.85,.25,1)",fill:"forwards"});
+  a.onfinish=()=>im.remove();return a;
+}
 function placerFiche(anim){
   const m=document.getElementById("main");const old=m.querySelector(".fpanel");if(old)old.remove();
   const f=fiche();if(!f)return null;
-  const tile=[...m.querySelectorAll("[data-esp]")].find(b=>b.dataset.esp===f.nom);if(!tile)return null;
+  const tile=trouverTuile(f.nom);if(!tile)return null;
   const tiles=[...tile.parentElement.querySelectorAll(":scope>button")];
   let last=tile;for(const t of tiles){if(t.offsetTop===tile.offsetTop)last=t}
   const panel=document.createElement("div");panel.className="fpanel";panel.innerHTML=ficheHTML(f,true);
   last.after(panel);
-  if(anim&&doux()){
-    const tr=tile.getBoundingClientRect(),pr=panel.getBoundingClientRect();
-    panel.style.transformOrigin=(tr.left+tr.width/2-pr.left)+"px "+(tr.top+tr.height/2-pr.top)+"px";
-    panel.animate([{transform:"scale(.14)",opacity:0,borderRadius:"28px"},{transform:"scale(1)",opacity:1,borderRadius:"14px"}],{duration:460,easing:"cubic-bezier(.2,.85,.25,1)"});
-  }
   if(D()) verrouiller();
+  if(anim&&doux()){
+    const h=panel.offsetHeight;const timg=tile.querySelector("img"),pimg=panel.querySelector(".fhead img");
+    const tr=timg.getBoundingClientRect(),ir=pimg.getBoundingClientRect();
+    pimg.style.visibility="hidden";
+    const a=volPhoto({left:tr.left,top:tr.top,width:tr.width,height:tr.height,src:timg.src},{left:ir.left,top:ir.top,width:ir.width,height:ir.height},560,"10px","0px");
+    a.finished.then(()=>{pimg.style.visibility=""}).catch(()=>{pimg.style.visibility=""});
+    panel.animate([{height:"0px",opacity:0},{height:h+"px",opacity:1}],{duration:520,easing:"cubic-bezier(.2,.85,.25,1)"});
+    panel.querySelectorAll(".txt,.fbody").forEach((el,k)=>el.animate([{opacity:0,transform:"translateY(14px)"},{opacity:1,transform:"none"}],{duration:420,delay:200+k*90,easing:"ease-out",fill:"backwards"}));
+  }
   return panel;
 }
 function fermerFiche(){
@@ -492,11 +535,13 @@ function fermerFiche(){
   const fin=()=>{if(panel)panel.remove();S.esp=null;S.sel={A:[],B:[],C:[]};
     m.querySelectorAll("[data-esp]").forEach(b=>b.classList.remove("on"));
     const n=document.getElementById("nav1");if(n)n.innerHTML=nav(null);renderLog()};
-  const tile=f&&[...m.querySelectorAll("[data-esp]")].find(b=>b.dataset.esp===f.nom);
+  const tile=f&&trouverTuile(f.nom);
   if(panel&&tile&&doux()){
-    const tr=tile.getBoundingClientRect(),pr=panel.getBoundingClientRect();
-    panel.style.transformOrigin=(tr.left+tr.width/2-pr.left)+"px "+(tr.top+tr.height/2-pr.top)+"px";
-    const a=panel.animate([{transform:"scale(1)",opacity:1},{transform:"scale(.14)",opacity:0}],{duration:320,easing:"cubic-bezier(.4,0,.6,1)",fill:"forwards"});
+    const timg=tile.querySelector("img"),pimg=panel.querySelector(".fhead img");
+    const tr=timg.getBoundingClientRect(),ir=pimg.getBoundingClientRect();
+    if(ir.bottom>0&&ir.top<innerHeight){volPhoto({left:ir.left,top:ir.top,width:ir.width,height:ir.height,src:pimg.src},{left:tr.left,top:tr.top,width:tr.width,height:tr.height},440,"0px","10px");pimg.style.visibility="hidden"}
+    panel.style.overflow="hidden";
+    const a=panel.animate([{height:panel.offsetHeight+"px",opacity:1},{height:"0px",opacity:0}],{duration:420,easing:"cubic-bezier(.4,0,.2,1)",fill:"forwards"});
     a.onfinish=fin;
   } else fin();
 }
@@ -505,10 +550,11 @@ function choisirEspece(nom){
   const m=document.getElementById("main");
   S.esp=nom;S.sel={A:[],B:[],C:[]};
   m.querySelectorAll("[data-esp]").forEach(b=>b.classList.toggle("on",b.dataset.esp===nom));
-  const panel=placerFiche(true);
-  const n=document.getElementById("nav1");if(n)n.innerHTML=nav("e2");
-  renderLog();
-  if(panel) setTimeout(()=>panel.scrollIntoView({behavior:doux()?"smooth":"auto",block:"nearest"}),doux()?120:0);
+  const old=m.querySelector(".fpanel");if(old)old.remove();
+  const n=document.getElementById("nav1");if(n)n.innerHTML=nav("e2");renderLog();
+  const tr=trouverTuile(nom).getBoundingClientRect();
+  if(doux()&&(tr.top>innerHeight*.42||tr.top<70)){window.scrollBy({top:tr.top-96,behavior:"smooth"});setTimeout(()=>{if(S.esp===nom)placerFiche(true)},420)}
+  else placerFiche(true);
 }
 let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(S.page==="e1"&&S.esp)placerFiche(false)},150)});
 function verrouiller(){
@@ -523,6 +569,8 @@ function haut(){const r=document.getElementById("rail");const y=r?r.getBoundingC
 
 document.addEventListener("click",e=>{
   const t=e.target.closest("button");if(!t)return;
+  if(t.dataset.home!==undefined){S=neuf();render();const an=t.dataset.ancre&&document.getElementById(t.dataset.ancre);
+    if(an)an.scrollIntoView({behavior:doux()?"smooth":"auto",block:"start"});else window.scrollTo({top:0,behavior:doux()?"smooth":"auto"});return}
   if(t.dataset.go) go(t.dataset.go);
   else if(t.dataset.back!==undefined) back();
   else if(t.dataset.propre!==undefined){S=neuf();go("e1")}
@@ -561,6 +609,7 @@ document.addEventListener("input",e=>{
   if(id==="delai"||id==="delaiC") document.querySelectorAll(`[data-delai="${id}"]`).forEach(b=>b.classList.remove("on"));
   if(id.startsWith("bil.")) majBilan();
 });
+document.getElementById("mosaic").innerHTML=ESPECES.map(e=>`<img src="${esc(e.photo)}" alt="" loading="lazy">`).join("");
 render();
 }
 </script>
