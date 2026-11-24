@@ -74,6 +74,13 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,
 .sp button.on{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue2)}
 .sp img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--line)}
 .sp span{padding:8px 10px 10px;font-weight:700;font-size:15px;line-height:1.25}
+.fpanel{grid-column:1/-1;margin:4px 0 8px;will-change:transform,opacity}
+.fpanel .fiche{border:2px solid var(--blue);box-shadow:0 22px 48px -24px rgba(0,60,110,.5)}
+.fpanel .txt{position:relative}
+.fermer{position:absolute;top:12px;right:12px;width:44px;height:44px;display:grid;place-items:center;padding:0;border-radius:50%;border:0;background:var(--card);color:var(--ink);font:700 26px/1 system-ui,sans-serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.fermer:hover{background:var(--blue);color:#fff}
+.fpanel .suite{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.sp button.on span{background:var(--blue);color:#fff}
 details.autre{margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
 details.autre summary{cursor:pointer;font-weight:700;color:var(--bluet);min-height:44px;display:flex;align-items:center}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -226,7 +233,7 @@ ol.trace{margin:6px 0 0;padding-left:22px}ol.trace li{margin-bottom:8px}ol.trace
   <div>© 2026 DAQ · Version de travail, novembre 2026.<br>Photos : Wikimedia Commons (auteur et licence indiqués sur chaque fiche).</div>
 </footer>
 
-<script src="contenu.js?v=2026-11-24d"></script>
+<script src="contenu.js?v=2026-11-24e"></script>
 <script>
 {
 const ETAPES=["","Bien connaître l'espèce","Quelle est la situation ?","Comprendre le problème","Mesures A et B","Réglé ?","Mesure C","Réglé ?","Mesure D, échec","Faire le bilan"];
@@ -273,11 +280,11 @@ function mesureBloc(m,cls,titre,generales){
     </div>
     <span class="lab">Autre mesure ${m} (à préciser)</span>${txt("autre."+m,S.autre[m],"Décrire la mesure")}</div>`;
 }
-function ficheHTML(f){
+function ficheHTML(f,panneau){
   const direct=[...f.grille].map((c,i)=>c==="D"?TYPES_NUISANCES[i]:null).filter(Boolean);
-  return `<div class="fiche anim" id="fiche">
+  return `<div class="fiche" id="fiche">
   <div class="fhead"><figure><img src="${esc(f.photo)}" alt="${esc(f.nom)}"><figcaption>${esc(f.credit)}</figcaption></figure>
-    <div class="txt"><h3>${esc(f.nom)}</h3><p class="mute" style="margin:0 0 12px">${esc(f.groupe)}</p>
+    <div class="txt">${panneau&&!D()?`<button class="fermer" data-fermer aria-label="Fermer la fiche">×</button>`:""}<h3>${esc(f.nom)}</h3><p class="mute" style="margin:0 0 12px">${esc(f.groupe)}</p>
       <h4>Mode de vie</h4><p>${esc(f.vie)}</p><h4>Son rôle et ce qu'il apporte</h4><p>${esc(f.role)}</p></div></div>
   <div class="fbody"><div class="fgrid">
     <div><h4>Ses besoins</h4><p>${esc(f.besoins)}</p></div>
@@ -289,7 +296,8 @@ function ficheHTML(f){
   ${direct.length?`<div class="pills">${direct.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:`<p>Aucune nuisance directe relevée.</p>`}
   <p class="mute" style="margin:0">${esc(f.profil)} Les autres types de nuisances sont faibles, sans source ou inexistants.</p>
   <div class="alerte o"><b>Attention :</b> ${esc(f.attention)}</div>
-  <h4>Sources</h4>${srcList(f.sources)}</div></div>`;
+  <h4>Sources</h4>${srcList(f.sources)}
+  ${panneau?`<div class="suite"><button class="btn${D()?" demo":""}" data-go="e2">Continuer avec : ${esc(f.nom)}</button><span class="mute">Pas la bonne espèce ? Choisissez une autre photo.</span></div>`:""}</div></div>`;
 }
 function grille(){
   const groupes=[...new Set(ESPECES.map(e=>e.groupe))];
@@ -319,8 +327,8 @@ const PAGES={
     <p class="mute">Parcourez un cas réel étape par étape, puis voyez son bilan et les choix faits à chaque étape.</p>
     <div class="ex3">${Object.entries(DEMOS).map(([k,d])=>`<button data-demo="${k}"><img src="${esc(photoDe(d.esp))}" alt=""><span>${chem(d.chemin)}<strong>${esc(d.titre)}</strong>${esc(d.sous)}</span></button>`).join("")}</div></div>`,
   e1:()=>`<div class="card anim">${tag(1)}<h2>Bien connaître l'espèce</h2>${note("e1")}
-    ${fiche()?`${ficheHTML(fiche())}${nav("e2")}<details class="autre"><summary>Choisir une autre espèce</summary>${grille()}</details>`
-      :`<p>De quelle espèce s'agit-il ? Cliquez sur sa photo pour voir sa fiche.</p>${grille()}${nav(null)}`}</div>`,
+    <p>De quelle espèce s'agit-il ? Cliquez sur sa photo : sa fiche s'ouvre juste en dessous. Cliquez à nouveau pour la refermer.</p>
+    ${grille()}<div id="nav1">${nav(S.esp?"e2":null)}</div></div>`,
   e2:()=>{const s=SITUATIONS;return `<div class="card anim">${tag(2)}<h2>Quelle est la situation ?</h2>${note("e2")}
     <div class="choices deux">
       ${opt("e2","presence","v",s.presence.titre,s.presence.texte,s.presence.ex)}
@@ -459,9 +467,50 @@ function render(){
   document.getElementById("rail").innerHTML=ETAPES.slice(1).map((t,i)=>`<div class="dot ${i+1<n?"fait":""} ${i+1===n?"ici":""}"><b>${i+1}</b>${i+1===n?esc(t):""}</div>`).join("");
   document.getElementById("main").innerHTML=PAGES[S.page]().replace('<div class="card anim">','<div class="card anim">'+demobar());
   document.getElementById("prog").style.width=(n/9*100)+"%";
+  if(S.page==="e1"&&S.esp) placerFiche(D()&&vis("e1")===0&&S.hist.length<=1);
   if(D()&&S.page!=="start") verrouiller();
   renderLog();
 }
+function placerFiche(anim){
+  const m=document.getElementById("main");const old=m.querySelector(".fpanel");if(old)old.remove();
+  const f=fiche();if(!f)return null;
+  const tile=[...m.querySelectorAll("[data-esp]")].find(b=>b.dataset.esp===f.nom);if(!tile)return null;
+  const tiles=[...tile.parentElement.querySelectorAll(":scope>button")];
+  let last=tile;for(const t of tiles){if(t.offsetTop===tile.offsetTop)last=t}
+  const panel=document.createElement("div");panel.className="fpanel";panel.innerHTML=ficheHTML(f,true);
+  last.after(panel);
+  if(anim&&doux()){
+    const tr=tile.getBoundingClientRect(),pr=panel.getBoundingClientRect();
+    panel.style.transformOrigin=(tr.left+tr.width/2-pr.left)+"px "+(tr.top+tr.height/2-pr.top)+"px";
+    panel.animate([{transform:"scale(.14)",opacity:0,borderRadius:"28px"},{transform:"scale(1)",opacity:1,borderRadius:"14px"}],{duration:460,easing:"cubic-bezier(.2,.85,.25,1)"});
+  }
+  if(D()) verrouiller();
+  return panel;
+}
+function fermerFiche(){
+  const m=document.getElementById("main");const panel=m.querySelector(".fpanel");const f=fiche();
+  const fin=()=>{if(panel)panel.remove();S.esp=null;S.sel={A:[],B:[],C:[]};
+    m.querySelectorAll("[data-esp]").forEach(b=>b.classList.remove("on"));
+    const n=document.getElementById("nav1");if(n)n.innerHTML=nav(null);renderLog()};
+  const tile=f&&[...m.querySelectorAll("[data-esp]")].find(b=>b.dataset.esp===f.nom);
+  if(panel&&tile&&doux()){
+    const tr=tile.getBoundingClientRect(),pr=panel.getBoundingClientRect();
+    panel.style.transformOrigin=(tr.left+tr.width/2-pr.left)+"px "+(tr.top+tr.height/2-pr.top)+"px";
+    const a=panel.animate([{transform:"scale(1)",opacity:1},{transform:"scale(.14)",opacity:0}],{duration:320,easing:"cubic-bezier(.4,0,.6,1)",fill:"forwards"});
+    a.onfinish=fin;
+  } else fin();
+}
+function choisirEspece(nom){
+  if(S.esp===nom){fermerFiche();return}
+  const m=document.getElementById("main");
+  S.esp=nom;S.sel={A:[],B:[],C:[]};
+  m.querySelectorAll("[data-esp]").forEach(b=>b.classList.toggle("on",b.dataset.esp===nom));
+  const panel=placerFiche(true);
+  const n=document.getElementById("nav1");if(n)n.innerHTML=nav("e2");
+  renderLog();
+  if(panel) setTimeout(()=>panel.scrollIntoView({behavior:doux()?"smooth":"auto",block:"nearest"}),doux()?120:0);
+}
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{if(S.page==="e1"&&S.esp)placerFiche(false)},150)});
 function verrouiller(){
   const m=document.getElementById("main");const c=m.querySelector(".card");if(c)c.classList.add("demo-on");
   m.querySelectorAll("input,textarea,select").forEach(el=>{el.disabled=true;el.setAttribute("aria-readonly","true")});
@@ -479,7 +528,8 @@ document.addEventListener("click",e=>{
   else if(t.dataset.propre!==undefined){S=neuf();go("e1")}
   else if(t.dataset.next!==undefined){const c=document.querySelector("#main .opt.demo, #main .btn.demo");if(c)c.click()}
   else if(t.dataset.reset!==undefined){S=neuf();render();window.scrollTo({top:0,behavior:doux()?"smooth":"auto"})}
-  else if(t.dataset.esp){S.esp=t.dataset.esp;S.sel={A:[],B:[],C:[]};render();const f=document.getElementById("fiche");if(f)f.scrollIntoView({behavior:doux()?"smooth":"auto",block:"start"})}
+  else if(t.dataset.esp){choisirEspece(t.dataset.esp)}
+  else if(t.dataset.fermer!==undefined){fermerFiche()}
   else if(t.dataset.delai){S[t.dataset.delai]=t.dataset.val;render()}
   else if(t.dataset.print!==undefined){majBilan();try{window.print()}catch(_){}}
   else if(t.dataset.mail!==undefined){
