@@ -158,6 +158,20 @@ footer b{color:var(--ink)}
 .demobar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:-6px 0 22px;padding:12px 16px;border-radius:12px;background:var(--blue);color:#fff}
 .demobar b{font-size:16px}.demobar span{font-size:14px;opacity:.92}
 .demobar .sp1{flex:1 1 220px}
+.lecture{display:inline-flex;align-items:center;gap:6px;font-size:13px!important;font-weight:700;background:rgba(255,255,255,.18);border-radius:99px;padding:3px 10px;margin-top:6px;opacity:1!important}
+.card.demo-on{border:2px solid var(--blue);box-shadow:0 0 0 5px var(--blue2)}
+.demo-on .opt:disabled,.demo-on .sp button:disabled,.demo-on .chips button:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none!important;filter:grayscale(.4)}
+.demo-on .sp button.on:disabled,.demo-on .chips button.on:disabled{opacity:1;filter:none}
+.demo-on label.ck{cursor:default}
+.demo-on input:disabled,.demo-on textarea:disabled,.demo-on select:disabled{opacity:1;color:var(--ink);-webkit-text-fill-color:var(--ink);background:var(--bg);border-style:dashed;cursor:default}
+.demo-on label.ck input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.demo-on label.ck{position:relative;align-items:center;border-radius:10px;padding:6px 10px;margin:2px 0}
+.demo-on label.ck span{display:flex;align-items:flex-start}
+.demo-on label.ck span::before{content:"";flex:none;display:grid;place-items:center;width:22px;height:22px;margin:1px 10px 0 0;border-radius:50%;border:2px solid var(--line);font-size:14px;font-weight:700}
+.demo-on label.ck:has(input:checked){background:var(--blue2);font-weight:700}
+.demo-on label.ck:has(input:checked) span::before{content:"✓";background:var(--blue);border-color:var(--blue);color:#fff}
+.demo-on label.ck:has(input:not(:checked)){opacity:.45}
+.demo-on details.autre{display:none}
 .demobar button{font:inherit;font-weight:700;font-size:15px;border-radius:99px;padding:8px 16px;min-height:40px;cursor:pointer;border:2px solid #fff;background:#fff;color:#0062ad}
 .demobar button.q{background:transparent;color:#fff}
 .chem{display:inline-flex;gap:4px;vertical-align:middle}
@@ -212,7 +226,7 @@ ol.trace{margin:6px 0 0;padding-left:22px}ol.trace li{margin-bottom:8px}ol.trace
   <div>© 2026 DAQ · Version de travail, novembre 2026.<br>Photos : Wikimedia Commons (auteur et licence indiqués sur chaque fiche).</div>
 </footer>
 
-<script src="contenu.js?v=2026-11-24c"></script>
+<script src="contenu.js?v=2026-11-24d"></script>
 <script>
 {
 const ETAPES=["","Bien connaître l'espèce","Quelle est la situation ?","Comprendre le problème","Mesures A et B","Réglé ?","Mesure C","Réglé ?","Mesure D, échec","Faire le bilan"];
@@ -228,7 +242,7 @@ const vis=p=>(S.visits[p]||1)-1;
 const note=p=>{const d=D();if(!d||!d.notes[p])return"";const a=d.notes[p];return `<div class="ex"><b>Dans l'exemple :</b> ${esc(a[Math.min(vis(p),a.length-1)])}</div>`};
 const chem=l=>`<span class="chem">${l.map(m=>`<i class="${m}">${m}</i>`).join("")}</span>`;
 const demobar=()=>{const d=D();if(!d||S.page==="start")return"";const fin=S.page==="e9";
-  return `<div class="demobar"><div class="sp1"><b>${esc(d.titre)}</b> ${chem(d.chemin)}<br><span>${esc(d.sous)}</span></div>${fin?"":`<button data-next>Étape suivante de l'exemple</button>`}<button class="q" data-reset>Quitter l'exemple</button></div>`};
+  return `<div class="demobar"><div class="sp1"><b>${esc(d.titre)}</b> ${chem(d.chemin)}<br><span>${esc(d.sous)}</span><br><span class="lecture">Exemple en lecture seule : les choix sont ceux du cas réel</span></div>${fin?`<button data-propre>Faire mon propre parcours</button>`:`<button data-next>Étape suivante de l'exemple</button>`}<button class="q" data-reset>Quitter l'exemple</button></div>`};
 const srcList=l=>l&&l.length?`<ul class="srcs">${l.map(s=>`<li><a href="${esc(s.u)}" target="_blank" rel="noopener">${esc(s.t)}</a></li>`).join("")}</ul>`:"";
 const hl=(p,id)=>{const d=D();if(!d||!d.choix[p])return"";const a=d.choix[p];return a[Math.min(vis(p),a.length-1)]===id?" demo":""};
 const tag=(n,t)=>`<div class="tag">ÉTAPE ${n}${t?" · "+t:""}</div>`;
@@ -445,7 +459,14 @@ function render(){
   document.getElementById("rail").innerHTML=ETAPES.slice(1).map((t,i)=>`<div class="dot ${i+1<n?"fait":""} ${i+1===n?"ici":""}"><b>${i+1}</b>${i+1===n?esc(t):""}</div>`).join("");
   document.getElementById("main").innerHTML=PAGES[S.page]().replace('<div class="card anim">','<div class="card anim">'+demobar());
   document.getElementById("prog").style.width=(n/9*100)+"%";
+  if(D()&&S.page!=="start") verrouiller();
   renderLog();
+}
+function verrouiller(){
+  const m=document.getElementById("main");const c=m.querySelector(".card");if(c)c.classList.add("demo-on");
+  m.querySelectorAll("input,textarea,select").forEach(el=>{el.disabled=true;el.setAttribute("aria-readonly","true")});
+  m.querySelectorAll(".opt:not(.demo),[data-esp],[data-delai]").forEach(b=>{b.disabled=true;b.title="Exemple en lecture seule"});
+  m.querySelectorAll('.row [data-go="e2"],[data-reset].btn').forEach(b=>b.style.display="none");
 }
 const majBilan=()=>{const d=document.getElementById("bilan-dl");if(d)d.innerHTML=dlHTML()};
 const doux=()=>!matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -455,6 +476,7 @@ document.addEventListener("click",e=>{
   const t=e.target.closest("button");if(!t)return;
   if(t.dataset.go) go(t.dataset.go);
   else if(t.dataset.back!==undefined) back();
+  else if(t.dataset.propre!==undefined){S=neuf();go("e1")}
   else if(t.dataset.next!==undefined){const c=document.querySelector("#main .opt.demo, #main .btn.demo");if(c)c.click()}
   else if(t.dataset.reset!==undefined){S=neuf();render();window.scrollTo({top:0,behavior:doux()?"smooth":"auto"})}
   else if(t.dataset.esp){S.esp=t.dataset.esp;S.sel={A:[],B:[],C:[]};render();const f=document.getElementById("fiche");if(f)f.scrollIntoView({behavior:doux()?"smooth":"auto",block:"start"})}
