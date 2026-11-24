@@ -17,6 +17,7 @@ Il suit l'arbre de décision de la méthode, étape par étape (ÉTAPE 1 à 9, M
 1. Ouvrir `contenu.js` sur GitHub, cliquer sur le crayon (« Edit this file »).
 2. Changer le texte **entre les guillemets**, sans retirer les guillemets ni les virgules.
 3. Cliquer sur « Commit changes ». Le site se met à jour en une à deux minutes.
+4. Si l'ancien texte s'affiche encore, changer la date à la fin de `contenu.js?v=…` dans `index.html` (cela force les navigateurs à recharger les textes).
 
 Règles de rédaction : écrire « être animal » / « êtres animaux », jamais « animal » seul ; « étape par étape » ; couleurs : vert = mesures A et B, orange = mesure C, rouge = mesure D (échec), violet = problème connu, mais rien n'est fait.
 
