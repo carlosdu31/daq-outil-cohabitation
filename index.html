@@ -12,7 +12,7 @@
 /* VOICE: calme, concret, niveau lycée ; un guichet municipal bienveillant
    IDEA: l'arbre de décision imprimé, déplié en parcours page par page
    PICTURE: le rail des 9 étapes et la carte de l'étape en cours ; photos des espèces
-   COLOUR and TYPE: blanc, bleu DAQ #0071C1 ; vert A/B, orange C, rouge D, violet "rien n'est fait" ; Atkinson Hyperlegible
+   COLOUR and TYPE: blanc, bleu DAQ #0071C1 ; vert A/B, orange C, rouge D, violet "problème connu, sans intervention" ; Atkinson Hyperlegible
    LAYOUT: barre logo, bandeau bleu, rail, carte centrale + "Votre parcours" (dessous sur tablette portrait et téléphone) */
 :root{color-scheme:light;--maxw:1680px;--gut:max(3vw,16px);--padx:max(var(--gut),calc((100% - var(--maxw))/2 + var(--gut)));
 --bg:light-dark(#f7f8fa,#0e1622);--card:light-dark(#fff,#16212f);--ink:light-dark(#14202e,#e8eef6);--mute:light-dark(#526174,#a3b3c6);
@@ -268,10 +268,10 @@ ol.trace{margin:6px 0 0;padding-left:22px}ol.trace li{margin-bottom:8px}ol.trace
 <div class="fbas"><span>2026 © Droit animalier Québec - DAQ · Outil en version de travail, contenus en cours de validation · Photos : Wikimedia Commons (auteur et licence sur chaque fiche)</span><a href="https://daq.quebec/politique-confidentialite/">Politique de confidentialité</a></div>
 
 
-<script src="contenu.js?v=2026-11-24g"></script>
+<script src="contenu.js?v=2026-11-26a"></script>
 <script>
 {
-const ETAPES=["","Bien connaître l'espèce","Quelle est la situation ?","Comprendre le problème","Mesures A et B","Réglé ?","Mesure C","Réglé ?","Mesure D, échec","Faire le bilan"];
+const ETAPES=["","Bien connaître l'espèce","Constat et étude de la situation","Identifier la cause et les intervenants","Mesures A et B","Réglé ?","Mesure C","Réglé ?","Mesure D : échec","Faire le bilan"];
 const neuf=()=>({page:"start",esp:null,sit:null,causes:[],acteurs:[],sel:{A:[],B:[],C:[]},autre:{causes:"",acteurs:"",A:"",B:"",C:""},
   delai:"",delaiC:"",rq:{e3:"",e4:"",e6:""},bil:{org:"",contact:"",lieu:"",date:"",resp:"",resultat:"",couts:"",nombre:"",marche:"",pasmarche:"",suite:""},
   hist:[],log:[],visits:{},demo:null});
@@ -353,9 +353,9 @@ const PAGES={
     <div class="stitle"><small>De la plus douce à la plus lourde</small><b>Les mesures d'intervention</b></div>
     <div class="ladder">
       <div class="v"><b>MESURE A</b><span>Adapter le lieu et vos habitudes</span></div>
-      <div class="v"><b>MESURE B</b><span>Éloigner l'être animal sans le toucher</span></div>
-      <div class="o"><b>MESURE C</b><span>Intervenir sur l'être animal sans le tuer</span></div>
-      <div class="r"><b>MESURE D, ÉCHEC</b><span>Mise à mort volontaire, en dernier recours, en conformité avec la loi</span></div>
+      <div class="v"><b>MESURE B</b><span>Éloigner l'être animal sans contact physique</span></div>
+      <div class="o"><b>MESURE C</b><span>Intervenir sans mise à mort volontaire</span></div>
+      <div class="r"><b>MESURE D : ÉCHEC</b><span>Mise à mort volontaire, en dernier recours, en conformité avec la loi</span></div>
     </div>
     <div class="stitle" id="exemples"><small>Trois cas réels</small><b>Exemples</b></div>
     <p class="mute">Suivez un cas réel étape par étape, jusqu'à son bilan.</p>
@@ -363,7 +363,7 @@ const PAGES={
   e1:()=>`<div class="card anim">${tag(1)}<h2>Bien connaître l'espèce</h2>${note("e1")}
     <p>De quelle espèce s'agit-il ? Cliquez sur sa photo : sa fiche s'ouvre juste en dessous. Cliquez à nouveau pour la refermer.</p>
     ${grille()}<div id="nav1">${nav(S.esp?"e2":null)}</div></div>`,
-  e2:()=>{const s=SITUATIONS;return `<div class="card anim">${tag(2)}<h2>Quelle est la situation ?</h2>${note("e2")}
+  e2:()=>{const s=SITUATIONS;return `<div class="card anim">${tag(2)}<h2>Constat et étude de la situation</h2>${note("e2")}
     <div class="choices deux">
       ${opt("e2","presence","v",s.presence.titre,s.presence.texte,s.presence.ex)}
       ${opt("e2","nuisance","b",s.nuisance.titre,s.nuisance.texte,s.nuisance.ex)}
@@ -375,9 +375,9 @@ const PAGES={
     <p>Pour éviter qu'un problème apparaisse : ne pas le nourrir, garder poubelles et composteurs fermés, et informer le voisinage.</p>
     <p>Si la situation change, revenez à l'étape 2.</p>
     <div class="row"><button class="btn sec" data-back>Retour</button><button class="btn" data-go="e9">Faire le bilan</button></div></div>`,
-  e3:()=>{const f=fiche();return `<div class="card anim">${tag(3)}<h2>Comprendre le problème</h2>${note("e3")}
-    ${S.sit==="imprevisible"?`<div class="alerte o">Situation imprévisible : la première intervention doit être rapide et la moins invasive possible. Ensuite, on cherche la cause.</div>`:""}
-    ${S.sit==="connu"?`<div class="alerte p">Le problème est connu depuis longtemps : il faut agir dès maintenant.</div>`:""}
+  e3:()=>{const f=fiche();return `<div class="card anim">${tag(3)}<h2>Identifier la cause et les intervenants</h2>${note("e3")}
+    ${S.sit==="imprevisible"?`<div class="alerte o">Situation imprévisible : intervention rapide et en douceur, la moins invasive possible. Ensuite, on cherche la cause.</div>`:""}
+    ${S.sit==="connu"?`<div class="alerte p">Problème connu, sans intervention pour y remédier : l'inaction n'est plus une option, il faut agir dès maintenant.</div>`:""}
     ${f?`<div class="alerte b"><b>Causes fréquentes (${esc(f.nom)}) :</b> ${esc(f.causes)}</div>`:""}
     <div class="cols">
       <div><h3>Quelle est la cause ?</h3><p class="mute">Elle est souvent liée à nos activités.</p>
@@ -391,7 +391,7 @@ const PAGES={
     <p>Choisissez une ou plusieurs mesures : on peut combiner des mesures A et B. Ce sont des exemples, à adapter au lieu.</p>
     <div class="alerte o">Jamais pendant la période de reproduction (nids, terriers, petits).${fiche()?`<br><b>${esc(fiche().nom)} :</b> ${esc(fiche().repro)}`:""}</div>
     ${mesureBloc("A","v","Adapter le lieu et vos habitudes",MESURES.A)}
-    ${mesureBloc("B","v","Éloigner l'être animal sans le toucher",MESURES.B)}
+    ${mesureBloc("B","v","Éloigner l'être animal sans contact physique",MESURES.B)}
     ${delaiBloc("delai","Délai précisé pour juger du résultat")}
     <span class="lab">Remarques</span>${area("rq.e4",S.rq.e4,"Qui fait quoi, quand, à quel coût")}
     ${nav("e5","Mesures en place : continuer")}</div>`,
@@ -401,19 +401,19 @@ const PAGES={
       ${opt("e5","autres","b","NON : tester d'autres mesures A et B","On remonte à l'étape 4")}
       ${opt("e5","epuisees","o","NON, mesures A et B épuisées","Passer à l'étape 6 : mesure C")}
     </div>${nav(null)}</div>`,
-  e6:()=>`<div class="card anim">${tag(6,"MESURE C")}<h2>Intervenir sur l'être animal sans le tuer</h2>${note("e6")}
+  e6:()=>`<div class="card anim">${tag(6,"MESURE C")}<h2>Intervenir sans mise à mort volontaire</h2>${note("e6")}
     <p class="mute">Par des personnes qualifiées, en conformité avec la loi. Les mesures A et B déjà en place sont maintenues.</p>
-    ${mesureBloc("C","o","Intervenir sans tuer",MESURES.C)}
+    ${mesureBloc("C","o","Intervenir sans mise à mort volontaire",MESURES.C)}
     ${delaiBloc("delaiC","Délai précisé pour juger du résultat")}
     <span class="lab">Remarques</span>${area("rq.e6",S.rq.e6,"Qui intervient, autorisations, coût")}
     ${nav("e7","Mesure en place : continuer")}</div>`,
   e7:()=>`<div class="card anim">${tag(7)}<h2>Le problème est-il réglé après le délai précisé${S.delaiC?` (${esc(S.delaiC)})`:""} ?</h2>${note("e7")}
     <div class="choices">
       ${opt("e7","ok","v","OUI, c'est réglé","Passer à l'étape 9 : faire le bilan")}
-      ${opt("e7","echec","r","NON, toutes les interventions ont échoué","Passer à l'étape 8")}
+      ${opt("e7","echec","r","NON, aucune intervention n'a eu le résultat escompté","Passer à l'étape 8")}
     </div>${nav(null)}</div>`,
-  e8:()=>`<div class="card anim">${tag(8,"MESURE D, ÉCHEC")}<h2>Mise à mort volontaire</h2>${note("e8")}
-    <div class="mesure r"><h3>MESURE D, ÉCHEC</h3><p style="margin:0">En dernier recours, en conformité avec la loi. Toutes les mesures A, B et C doivent avoir été essayées et documentées. C'est un échec de la cohabitation : le bilan doit expliquer pourquoi.</p></div>
+  e8:()=>`<div class="card anim">${tag(8,"MESURE D : ÉCHEC")}<h2>Mise à mort volontaire</h2>${note("e8")}
+    <div class="mesure r"><h3>MESURE D : ÉCHEC – Mise à mort volontaire</h3><p style="margin:0">En dernier recours, en conformité avec la loi. Toutes les mesures A, B et C doivent avoir été essayées et documentées. C'est un échec de la cohabitation : le bilan doit expliquer pourquoi.</p></div>
     ${nav("e9","Faire le bilan")}</div>`,
   e9:()=>{const b=S.bil;return `<div class="card anim">
     <div class="print-only pcover"><img src="logo-daq.png" alt=""><div><b>Droit animalier Québec (DAQ)</b>Bilan d'intervention · Cohabiter avec les êtres animaux liminaires<br>Bilan établi le ${esc(auj())}</div></div>
@@ -460,12 +460,12 @@ function bilanItems(){
   if(S.rq.e4) it.push(["Remarques (mesures A et B)",S.rq.e4]);
   if(S.delaiC) it.push(["Délai pour la mesure C",S.delaiC]);
   if(S.rq.e6) it.push(["Remarques (mesure C)",S.rq.e6]);
-  if(S.log.some(l=>l.p==="e8")) it.push(["MESURE D, ÉCHEC","Mise à mort volontaire"]);
+  if(S.log.some(l=>l.p==="e8")) it.push(["MESURE D : ÉCHEC","Mise à mort volontaire"]);
   [["Responsable du suivi",b.resp],["Résultat",b.resultat],["Coûts",b.couts],["Êtres animaux concernés",b.nombre],["Ce qui a marché",b.marche],["Ce qui n'a pas marché",b.pasmarche],["À refaire ou à éviter",b.suite]].forEach(([k,v])=>{if(v) it.push([k,v])});
   return it;
 }
 const dlHTML=()=>bilanItems().map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
-const NOMP={e1:"ÉTAPE 1 · Bien connaître l'espèce",e2:"ÉTAPE 2 · Quelle est la situation ?",pres:"ÉTAPE 2 · Simple présence : aucune action requise",e3:"ÉTAPE 3 · Comprendre le problème",e4:"ÉTAPE 4 · Mesures d'intervention A et B",e5:"ÉTAPE 5 · Le problème est-il réglé ?",e6:"ÉTAPE 6 · MESURE C",e7:"ÉTAPE 7 · Le problème est-il réglé ?",e8:"ÉTAPE 8 · MESURE D, ÉCHEC",e9:"ÉTAPE 9 · Faire le bilan"};
+const NOMP={e1:"ÉTAPE 1 · Bien connaître l'espèce",e2:"ÉTAPE 2 · Constat et étude de la situation",pres:"ÉTAPE 2 · Simple présence : aucune action requise",e3:"ÉTAPE 3 · Identifier la cause et les intervenants",e4:"ÉTAPE 4 · Mesures d'intervention A et B",e5:"ÉTAPE 5 · Le problème est-il réglé ?",e6:"ÉTAPE 6 · MESURE C",e7:"ÉTAPE 7 · Le problème est-il réglé ?",e8:"ÉTAPE 8 · MESURE D : ÉCHEC",e9:"ÉTAPE 9 · Faire le bilan"};
 function infoPage(p){
   const add=(a,x)=>a.concat(x?[x]:[]);const j=a=>a.join(" ; ");
   if(p==="e1") return S.esp||"";
@@ -480,7 +480,7 @@ const traceHTML=()=>traceItems().map(x=>`<li><b>${esc(x.t)}</b>${x.d?` → ${esc
 const bilanTexte=()=>"Bilan d'intervention · Cohabiter avec les êtres animaux liminaires\nÉtabli le "+auj()+(D()?"\n"+D().titre+" : "+D().sous:"")+"\n\n"+bilanItems().map(([k,v])=>k+" : "+v).join("\n")+"\n\nParcours détaillé :\n"+traceItems().map((x,i)=>(i+1)+". "+x.t+(x.d?" → "+x.d:"")+(x.i?" ("+x.i+")":"")).join("\n")+(D()?"\n\nCe que montre cet exemple : "+D().verdict:"");
 const LOGTXT={e1:"ÉTAPE 1",e2:"ÉTAPE 2",pres:"Simple présence",e3:"ÉTAPE 3",e4:"ÉTAPE 4",e5:"ÉTAPE 5",e6:"ÉTAPE 6 · MESURE C",e7:"ÉTAPE 7",e8:"ÉTAPE 8 · MESURE D",e9:"ÉTAPE 9"};
 const ROUTE={presence:"pres",nuisance:"e3",imprevisible:"e3",connu:"e3",ok:"e9",autres:"e4",epuisees:"e6",echec:"e8"};
-const DEC={presence:"simple présence",nuisance:"nuisance",imprevisible:"situation imprévisible",connu:"problème connu, rien n'est fait",ok:"réglé",autres:"pas réglé, autres mesures A et B",epuisees:"pas réglé, A et B épuisées",echec:"pas réglé, échec"};
+const DEC={presence:"simple présence",nuisance:"nuisance",imprevisible:"situation imprévisible",connu:"problème connu, sans intervention pour y remédier",ok:"réglé",autres:"pas réglé, autres mesures A et B",epuisees:"pas réglé, A et B épuisées",echec:"pas réglé, aucune intervention n'a eu le résultat escompté"};
 
 function go(id){
   if(S.page==="e2") S.sit=id;

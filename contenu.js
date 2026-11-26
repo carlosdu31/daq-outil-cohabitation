@@ -18,9 +18,9 @@ const DELAIS = ["1 semaine","2 semaines","1 mois","3 mois","Une saison complète
 // Les 4 situations de l'étape 2
 const SITUATIONS = {
   presence:{titre:"L'être animal est simplement présent", texte:"Il vit près de nous, traverse un terrain, se nourrit dans un parc ou un boisé. Il ne cause ni dégât ni risque.", ex:"Ex. : un renard qui traverse une cour, des bernaches qui broutent dans un parc, un écureuil dans un arbre."},
-  nuisance:{titre:"Il cause une nuisance", texte:"Un inconvénient ou un dégât qui se répète : bruit, odeur, saleté, dommage à un bâtiment, à un équipement, à un jardin ou à une culture.", ex:"Ex. : poubelles renversées chaque nuit, bruits dans un grenier, pelouse retournée, fientes sur une terrasse, coupures électriques."},
-  imprevisible:{titre:"Situation imprévisible", texte:"Une situation soudaine qui demande d'agir vite, en douceur, avec l'intervention la moins invasive possible. Ensuite, on cherche la cause.", ex:"Ex. : être animal blessé, coincé dans une cheminée ou entré dans une maison, comportement inhabituel (désorienté en plein jour), risque immédiat pour la sécurité des personnes."},
-  connu:{titre:"Problème connu, mais rien n'est fait", texte:"Le problème dure depuis longtemps. Tout le monde le connaît, mais aucune mesure n'a été prise. Il s'aggrave avec le temps : il faut agir dès maintenant.", ex:"Ex. : plaintes répétées chaque été dans le même quartier, collisions routières au même endroit année après année."}
+  nuisance:{titre:"Nuisance", texte:"Une atteinte, au-delà du normal, à la tranquillité, à la salubrité, à la sécurité ou aux biens : bruit, odeur, saleté, dommage à un bâtiment, à un équipement, à un jardin ou à une culture.", ex:"Ex. : poubelles renversées chaque nuit, bruits dans un grenier, pelouse retournée, fientes sur une terrasse, coupures électriques."},
+  imprevisible:{titre:"Situation imprévisible", texte:"Une situation soudaine qui demande une intervention rapide et en douceur, la moins invasive possible. Ensuite, on cherche la cause.", ex:"Ex. : être animal blessé, coincé dans une cheminée ou entré dans une maison, comportement inhabituel (désorienté en plein jour), risque immédiat pour la sécurité des personnes."},
+  connu:{titre:"Problème connu, sans intervention pour y remédier", texte:"Le problème dure depuis longtemps. Tout le monde le connaît, mais aucune mesure n'a été prise, et il s'aggrave avec le temps. L'inaction n'est plus une option : il faut agir dès maintenant.", ex:"Ex. : plaintes répétées chaque été dans le même quartier, collisions routières au même endroit année après année."}
 };
 
 // Causes et acteurs proposés à l'étape 3
@@ -30,7 +30,7 @@ const ACTEURS = ["Le propriétaire du lieu ou de l'équipement","La municipalit�
 // Mesures générales (en plus des mesures propres à chaque espèce)
 const MESURES = {
   A:["Sécuriser les poubelles, bacs et composteurs (couvercles verrouillables, sortis le matin de la collecte)","Ne laisser aucune nourriture dehors (nourriture d'êtres animaux de compagnie, fruits tombés, graines sous les mangeoires)","Protéger les bâtiments et équipements (boucher les ouvertures, grillages, dispositifs de protection)","Aménager le lieu (élagage, clôtures, entretien des terrains vacants)","Informer les citoyens (dépliant, rencontre, panneau) et adapter nos habitudes","Rappeler et faire respecter l'interdiction de nourrir la faune"],
-  B:["Répulsifs (odeur, goût), sans danger pour l'être animal","Effarouchement (lumière, bruit, arroseur à détecteur de mouvement)","Porte à sens unique : l'être animal sort, mais ne peut pas revenir (jamais s'il y a des petits)","Rendre le lieu moins accueillant (présence humaine, lumière, radio près d'un abri)"],
+  B:["Répulsifs (odeur, goût), sans danger pour l'être animal","Effarouchement (lumière, bruit, arroseur à détecteur de mouvement)","Fermeture des accès une fois l'être animal sorti (sortie à sens unique ; jamais s'il y a des petits)","Rendre le lieu moins accueillant (présence humaine, lumière, radio près d'un abri)"],
   C:["Contrôle de la fertilité","Capture et relâche sur place, par des personnes qualifiées","Déplacement par les autorités compétentes, lorsque la loi le permet"]
 };
 
@@ -51,7 +51,7 @@ const ESPECES = [
   profil:"Profil élevé et homogène : presque tous les types de nuisances sont présents, surtout liés à la nourriture accessible.",
   causes:"Poubelles et composteurs ouverts, nourriture laissée dehors, accès aux greniers, cheminées et dessous de cabanons.",
   A:["Bacs à couvercle verrouillable, sortis le matin de la collecte","Chapeau grillagé sur la cheminée","Fermer les ouvertures sous les galeries et cabanons, après le départ des petits"],
-  B:["Porte à sens unique, une fois les petits partis","Lumière et radio près de la tanière pour inciter la mère à déménager avec ses petits"],
+  B:["Fermeture des accès une fois l'être animal sorti (sortie à sens unique), une fois les petits partis","Lumière et radio près de la tanière pour inciter la mère à déménager avec ses petits"],
   C:["Capture et relâche sur place par des personnes qualifiées"],
   delai:"2 à 4 semaines",
   attention:"Ne jamais le manipuler. La rage du raton laveur est de retour au Québec depuis décembre 2024 : signaler un raton laveur mort ou au comportement anormal au 1 877 346-6763 ou sur Québec.ca/rageduratonlaveur. Le déplacement et la relocalisation sont interdits en Estrie, en Montérégie et au Centre-du-Québec.",
@@ -65,7 +65,7 @@ const ESPECES = [
   profil:"Profil élevé et homogène, comme le raton laveur.",
   causes:"Dessous de galeries et de cabanons ouverts, nourriture et compost accessibles, pelouses riches en larves.",
   A:["Grillage enfoui en « L » autour du dessous des galeries et cabanons, hors période des petits","Retirer nourriture et compost accessibles"],
-  B:["Porte à sens unique sur le terrier, une fois les petits partis","Lumière près de l'entrée du terrier"],
+  B:["Fermeture du terrier une fois l'être animal sorti (sortie à sens unique), une fois les petits partis","Lumière près de l'entrée du terrier"],
   C:[],
   delai:"1 à 3 semaines",
   attention:"Si elle tape des pattes ou se retourne, s'éloigner lentement : elle avertit avant de projeter son liquide. Garder les chiens en laisse le soir. Une mouffette morte ou au comportement anormal se signale au 1 877 346-6763 (surveillance de la rage).",
@@ -79,7 +79,7 @@ const ESPECES = [
   profil:"Profil assez élevé, centré sur la santé, la salubrité, les bâtiments et les cultures.",
   causes:"Nourriture et compost accessibles, abris ouverts sous les bâtiments pendant l'hiver.",
   A:["Fermer les accès sous les bâtiments, après avoir vérifié qu'il est sorti","Retirer nourriture et compost accessibles"],
-  B:["Porte à sens unique","Répulsifs près de l'abri"],
+  B:["Fermeture des accès une fois l'être animal sorti (sortie à sens unique)","Répulsifs près de l'abri"],
   C:[],
   delai:"2 semaines",
   attention:"Quand il se sent menacé, il « fait le mort » : le laisser tranquille, il repartira de lui-même.",
@@ -107,7 +107,7 @@ const ESPECES = [
   profil:"Profil polarisé : la nuisance porte surtout sur les bâtiments et les équipements.",
   causes:"Branches qui touchent le toit ou les fils, ouvertures dans le toit ou les soffites, mangeoires accessibles.",
   A:["Élaguer les branches à 2 ou 3 m du toit et des équipements","Grillage solide sur les ouvertures, après le départ des petits","Dispositifs de protection sur les équipements électriques","Mangeoires à l'épreuve des écureuils"],
-  B:["Porte à sens unique","Répulsifs (odeur, goût)"],
+  B:["Fermeture des accès une fois l'être animal sorti (sortie à sens unique)","Répulsifs (odeur, goût)"],
   C:[],
   delai:"2 à 4 semaines",
   attention:"Avant de fermer un accès, s'assurer qu'aucun petit n'est resté à l'intérieur.",
@@ -121,7 +121,7 @@ const ESPECES = [
   profil:"Profil polarisé : bâtiments (terriers sous les fondations) et jardins ou cultures.",
   causes:"Potagers non protégés, sol meuble près des fondations ou sous les cabanons.",
   A:["Clôture enfouie autour du potager","Combler les terriers abandonnés, après avoir vérifié qu'ils sont vides"],
-  B:["Porte à sens unique sur le terrier, hors période des petits et hors hibernation","Répulsifs et effarouchement près du terrier"],
+  B:["Fermeture du terrier une fois l'être animal sorti (sortie à sens unique), hors période des petits et hors hibernation","Répulsifs et effarouchement près du terrier"],
   C:[],
   delai:"2 à 4 semaines",
   attention:"Ne jamais fermer un terrier pendant l'hibernation ni en mai, juin et juillet (petits).",
@@ -360,7 +360,7 @@ const DEMOS = {
   ecureuil:{titre:"Exemple mesure A", chemin:["A"], sous:"Pénétration des écureuils dans les transformateurs électriques",
     esp:"Écureuils gris et roux",
     notes:{
-      e1:["L'écureuil ronge par besoin (ses dents poussent en continu), grimpe partout et cherche des abris en hauteur. Il a des petits au printemps, et parfois une deuxième portée l'été."],
+      e1:["L'écureuil ronge par besoin (ses dents poussent en continu), grimpe partout et cherche des abris en hauteur. Il a ses petits au printemps, parfois aussi l'été."],
       e2:["Nuisance : des coupures électriques. En mai 2016, un écureuil coincé dans des fils a privé près de 3 000 abonnés d'électricité dans Ahuntsic, à Montréal, et mis des feux de circulation en panne [1]. Hydro-Québec identifie la faune (écureuils, oiseaux) parmi les causes de pannes [2]."],
       e3:["La cause est un accès : l'écureuil atteint l'équipement par les poteaux, les fils ou les branches. Qui peut agir : Hydro-Québec, propriétaire de l'équipement."],
       e4:["C'est ce que fait Hydro-Québec, avec une mesure A : son plan de renforcement du réseau prévoit des pare-animaux sur plus de 400 000 transformateurs [3][4], et elle en ajoute sur les lignes où les pannes sont fréquentes [2]. L'élagage des branches qui servent de pont complète la protection, en dehors de la période de reproduction."],
@@ -384,7 +384,7 @@ const DEMOS = {
     esp:"Raton laveur",
     notes:{
       e1:["Le raton laveur mange de tout, sort la nuit et se sert très bien de ses pattes. Les femelles ont leurs petits au printemps et cherchent alors des abris (cabanons, dessous de galeries)."],
-      e2:["Nuisance : des poubelles renversées, des déchets dans la rue et des jardins fouillés. Si ça dure depuis des années dans le quartier sans que rien ne soit fait, on bascule dans la case violette « Problème connu, mais rien n'est fait »."],
+      e2:["Nuisance : des poubelles renversées, des déchets dans la rue et des jardins fouillés. Si ça dure depuis des années dans le quartier sans que rien ne soit fait, on bascule dans la case violette « Problème connu, sans intervention pour y remédier »."],
       e3:["La cause est de la nourriture facile d'accès : bacs sans couvercle, sacs posés au sol la veille de la collecte, composteurs ouverts, nourriture d'êtres animaux de compagnie laissée dehors. Qui peut agir : les citoyens (bacs fermés, sortir les ordures le matin) et la municipalité ou l'arrondissement (type de bacs, horaires de collecte, règlement, information du quartier)."],
       e4:["Mesure A : bacs à couvercle verrouillable, sortie des ordures le matin, composteurs fermés et verrouillables, information du quartier. Mesure B si besoin, combinée à A : arroseur à détecteur de mouvement, répulsif."],
       e5:["On le vérifie par exemple après quelques semaines. OUI : on passe à l'étape 9. Sinon, on remonterait à l'étape 4 pour tester d'autres mesures A et B."],
@@ -408,7 +408,7 @@ const DEMOS = {
       e4:["Mesure A : interdiction de nourrir les êtres animaux sauvages (amende minimale de 300 $ à Montréal [6], interdiction au Québec depuis mars 2023 [7]), plantation d'arbres sur 3,7 ha, panneaux routiers. Mesure B : exclos, c'est-à-dire des clôtures d'environ 2,5 m sur 0,5 ha qui protègent la repousse de la forêt [5a]."],
       e5:["NON, mesures A et B épuisées : la population a augmenté de 253 % depuis 2021 [5a]. On passe à la mesure C (étape 6)."],
       e6:["Le déplacement des cerfs a été étudié, puis écarté par le comité scientifique et le ministère en raison des risques de blessure ou de mort. Le contrôle de la fertilité est un objectif évalué par le projet de recherche PARCS en santé, sur cinq ans [5a][5b]."],
-      e7:["NON : le contrôle de la fertilité n'est pas encore appliqué, et la population continue d'augmenter. On passe à la mesure D (étape 8)."],
+      e7:["NON, aucune intervention n'a eu le résultat escompté : le contrôle de la fertilité n'est pas encore appliqué, et la population continue d'augmenter. On passe à la mesure D (étape 8)."],
       e8:["Sur recommandation d'un comité de biologistes et de vétérinaires (Ville, ministère, universités), environ 112 cerfs ont été abattus par des tireurs professionnels en octobre 2024. Une seconde opération vise environ 190 cerfs sur 211 dénombrés à l'hiver 2026 [5b][8]."],
       e9:["Bilan : aucun contrôle n'a eu lieu en 2025, et la densité est restée élevée [8]. Le bilan doit comparer chaque étape : ce qui a été fait, pendant combien de temps, et avec quel résultat."]},
     choix:{e2:["nuisance"],e5:["epuisees"],e7:["echec"]},
