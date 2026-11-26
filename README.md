@@ -3,7 +3,7 @@
 Outil en ligne du **DAQ (Droit animalier Québec)**, pour les municipalités et les citoyens.
 Il suit l'arbre de décision de la méthode, étape par étape (ÉTAPE 1 à 9, MESURES A, B, C et D, ÉCHEC).
 
-**Site : https://carlosdu31.github.io/daq-outil-cohabitation/**
+**Site : https://daq-quebec.github.io/cohabitation/**
 
 **Statut : version de travail (novembre 2026).** Les contenus sont en cours de validation par le DAQ et évolueront au fil des réunions.
 
